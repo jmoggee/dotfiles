@@ -1,0 +1,53 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor DP-0 -d 1 2 3 4 5 6 7 8 9
+bspc monitor HDMI-0 -d 1 2 3 4 5 6 7 8 9
+
+### BSPWM configuration ###
+bspc config window_gap           8
+bspc config top_padding          26
+bspc config top_monocle_padding  0
+bspc config border_width         2
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle 	 true
+
+# Warp mouse when changing monitors 
+bspc config pointer_follows_monitor true
+
+# Colors
+bspc config active_border_color "#767c82"
+bspc config focused_border_color "#767c82"
+bspc config normal_border_color "#373d41"
+bspc config presel_feedback_color "#373d41"
+
+# Rules
+bspc rule -a feh state=floating
+bspc rule -a openssh-askpass state=floating
+bspc rule -a Zathura state=tiled
+bspc rule -a Pavucontrol state=floating
+bspc rule -a java:*:Crypt state=floating
+bspc rule -a *:SPLASH state=floating
+
+bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
+
+# Set cursor on root to normal pointer
+xsetroot -cursor_name left_ptr &
+
+picom &
+dunst &
+# feh --bg-fill ~/Wallpapers/autumn-trees.jpg ~/Wallpapers/autumn-trees-mist.jpg &
+feh --bg-fill ~/Wallpapers/spaceman.png &
+conky -c $HOME/.config/conky/conky.conf &
+$HOME/bin/overGrive &
+
+# Ensure pulseaudio is started, otherwise our volume control in the bar might not show.
+pulseaudio --start
+
+# Start polybar
+$HOME/.config/polybar/launch.sh
+

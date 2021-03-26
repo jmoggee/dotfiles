@@ -1,0 +1,11 @@
+#!/bin/sh
+
+wid="$1"
+class="$2"
+instance="$3"
+#eval "$4"
+
+# Brave picture in picture rule
+title="$(xtitle "$wid")"
+[ -z "$class" ] && [ -z "$instance" ] && [ "$title" = "Picture in picture" ] \
+    && echo 'state=floating sticky=on'
