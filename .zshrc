@@ -3,6 +3,7 @@ ZSH_THEME="robbyrussell"
 
 # Extra user paths
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.asdf/installs/nodejs/15.10.0/.npm/bin:$PATH
 
 plugins=(
   git
