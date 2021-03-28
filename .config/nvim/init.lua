@@ -23,6 +23,8 @@ paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
 
 paq {'b4skyx/serenade'}
 
+paq {'norcalli/nvim-colorizer.lua'}
+
 paq {'itchyny/lightline.vim'}
 
 paq {'tpope/vim-vinegar'}
@@ -188,7 +190,6 @@ require('telescope').setup {}
 g.indent_blankline_char = '▏'
 
 -- LIGHTLINE
-
 vim.g.lightline = {
   colorscheme = 'serenade';
   active = {
@@ -199,6 +200,9 @@ vim.g.lightline = {
   };
   component_function = { gitbranch = 'fugitive#head', };
 }
+
+-- COLORIZER
+require('colorizer').setup()
 
 -- VIMWIKI
 -- g.vimwiki_list = {{path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}}
