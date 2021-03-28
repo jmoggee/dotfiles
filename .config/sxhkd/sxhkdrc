@@ -155,6 +155,12 @@ XF86Audio{Play,Prev,Next}
   playerctl --player=playerctld {play-pause,next,previous}
 
 #
+# screenshot
+#
+super + shift + s
+  scrot -s
+
+#
 # application shortcuts
 #
 super + F1
