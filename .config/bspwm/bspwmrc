@@ -31,6 +31,7 @@ bspc rule -a openssh-askpass state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a Pavucontrol state=floating
 bspc rule -a java:*:Crypt state=floating
+bspc rule -a RescueTime state=floating
 bspc rule -a *:SPLASH state=floating
 
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
@@ -43,7 +44,9 @@ dunst &
 # feh --bg-fill ~/Wallpapers/autumn-trees.jpg ~/Wallpapers/autumn-trees-mist.jpg &
 feh --bg-fill ~/Wallpapers/spaceman.png &
 conky -c $HOME/.config/conky/conky.conf &
+
 $HOME/bin/overGrive &
+rescuetime &
 
 # Ensure pulseaudio is started, otherwise our volume control in the bar might not show.
 pulseaudio --start
