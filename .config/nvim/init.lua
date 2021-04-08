@@ -213,3 +213,6 @@ cmd("autocmd BufWritePre *.py execute ':Black'")
 
 -- ELIXIR
 g.mix_format_on_save = 1
+
+-- JSON
+g.vim_json_syntax_conceal = 0
