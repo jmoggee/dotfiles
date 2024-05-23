@@ -7,5 +7,5 @@ return {
     })
 
     vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open Oil" })
-  end
+  end,
 }

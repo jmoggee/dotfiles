@@ -6,7 +6,6 @@ return {
     "mfussenegger/nvim-dap-python",
   },
   config = function()
-
     local dap, dapui = require("dap"), require("dapui")
 
     dapui.setup({})
