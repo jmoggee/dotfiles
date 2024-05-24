@@ -9,10 +9,10 @@
     "modules-center": [
     ],
     "modules-right": [
+        "tray",
         "pulseaudio",
         "battery",
-        "clock",
-        "tray"
+        "clock"
     ],
     // Modules configuration
     "hyprland/workspaces": {
