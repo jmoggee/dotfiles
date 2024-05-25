@@ -31,3 +31,16 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("setlocal nonumber norelativenumber")
   end,
 })
+
+local laststatus_toggle = 0
+local function toggle_statusbar()
+  if laststatus_toggle == 0 then
+    vim.o.laststatus = 0
+    laststatus_toggle = 1
+  else
+    vim.o.laststatus = 2
+    laststatus_toggle = 0
+  end
+end
+
+vim.keymap.set("n", "<leader>vb", toggle_statusbar, { silent = true })
