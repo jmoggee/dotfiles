@@ -38,5 +38,17 @@ return {
 			{ silent = true }
 		)
 		vim.keymap.set("n", "<leader>tp", ":lua require('neotest').output_panel.toggle()<cr>", { silent = true })
+		vim.keymap.set(
+			"n",
+			"<leader>t,",
+			":lua require('neotest').jump.prev({ status = 'failed' })<cr>",
+			{ silent = true }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>t;",
+			":lua require('neotest').jump.next({ status = 'failed' })<cr>",
+			{ silent = true }
+		)
 	end,
 }
