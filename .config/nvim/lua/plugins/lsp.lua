@@ -32,22 +32,35 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.pyright.setup({
+			-- lspconfig.pyright.setup({
+			-- 	capabilities = capabilities,
+			-- 	settings = {
+			-- 		pyright = {
+			-- 			disableOrganizeImports = true,
+			-- 		},
+			-- 		python = {
+			-- 			analysis = {
+			-- 				ignore = { "*" },
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
+
+			-- lspconfig.ruff_lsp.setup({
+			--   capabilities = capabilities,
+			-- })
+
+			lspconfig.pylsp.setup({
 				capabilities = capabilities,
 				settings = {
-					pyright = {
-						disableOrganizeImports = true,
-					},
-					python = {
-						analysis = {
-							ignore = { "*" },
+					pylsp = {
+						plugins = {
+							rope_autoimport = {
+								enabled = true,
+							},
 						},
 					},
 				},
-			})
-
-			lspconfig.ruff_lsp.setup({
-				capabilities = capabilities,
 			})
 
 			lspconfig.csharp_ls.setup({
