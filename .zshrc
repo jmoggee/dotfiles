@@ -79,6 +79,7 @@ export EDITOR='nvim'
 # Aliases
 alias ls='eza --icons=auto'
 alias lh='eza --icons=auto -lha'
+alias la='eza --icons=auto -a'
 alias vi="nvim"
 alias vim="nvim"
 alias c="clear"
