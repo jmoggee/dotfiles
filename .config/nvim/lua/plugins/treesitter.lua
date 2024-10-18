@@ -10,6 +10,22 @@ return {
 			auto_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
+      ensure_installed = {
+        "bash",
+        "c_sharp",
+        "css",
+        "dockerfile",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "regex",
+        "scss",
+        "toml",
+        "python",
+        "htmldjango"
+      }
 		})
 	end,
 }
