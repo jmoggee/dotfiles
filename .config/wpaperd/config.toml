@@ -1,4 +1,4 @@
 [default]
-path = "/home/jean/Wallpapers"
-duration = "60m"
+path = "~/Wallpapers"
+duration = "10m"
 sorting = "random"
