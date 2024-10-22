@@ -36,6 +36,8 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light jeffreytse/zsh-vi-mode
 zinit light Aloxaf/fzf-tab
 
+zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+
 # Zsh snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
