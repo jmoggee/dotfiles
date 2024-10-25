@@ -71,6 +71,10 @@ return {
       _reset_state()
     end
 
+    vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" })
+
     dapui.setup({})
 
     require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
@@ -93,7 +97,10 @@ return {
 
     require("dap.ext.vscode").load_launchjs()
 
-    vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, {})
-    vim.keymap.set("n", "<Leader>dc", dap.continue, {})
+    vim.keymap.set("n", "<Leader>dd", dap.toggle_breakpoint, {})
+    vim.keymap.set("n", "<F2>", dap.continue, {})
+    vim.keymap.set("n", "<F3>", dap.step_over, {})
+    vim.keymap.set("n", "<F4>", dap.step_into, {})
+    vim.keymap.set("n", "<F5>", dap.step_into, {})
   end,
 }
