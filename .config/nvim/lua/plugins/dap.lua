@@ -4,6 +4,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
     "mfussenegger/nvim-dap-python",
+    "nanozuki/tabby.nvim",
   },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
@@ -22,6 +23,7 @@ return {
     local function _create_debug_tab()
       vim.cmd('tabnew %')
       debug_tab = vim.api.nvim_get_current_tabpage()
+      vim.cmd("TabRename DEBUG")
     end
 
     local function _restore_previous_position()
