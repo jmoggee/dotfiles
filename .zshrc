@@ -81,11 +81,11 @@ export EDITOR='nvim'
 # Aliases
 alias ls='eza --icons=auto'
 alias lh='eza --icons=auto -lha'
-alias la='eza --icons=auto -a'
+alias la='eza --icons=auto -la'
 alias vi="nvim"
 alias vim="nvim"
 alias c="clear"
-alias txl='tmuxifier load-session'
+alias tx="tmuxifier load-session"
 
 # Shell integrations
 eval "$(fzf --zsh)"
