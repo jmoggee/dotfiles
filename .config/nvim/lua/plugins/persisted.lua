@@ -9,6 +9,13 @@ return {
 
     persisted.setup({
       use_git_branch = true,
+      should_save = function()
+        -- Do not save if the alpha dashboard is the current filetype
+        if vim.bo.filetype == "alpha" then
+          return false
+        end
+        return true
+      end,
     })
     telescope.load_extension("persisted")
 
