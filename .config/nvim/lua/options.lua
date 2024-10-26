@@ -8,8 +8,14 @@ vim.cmd("set relativenumber")
 vim.g.mapleader = " "
 
 vim.opt.swapfile = false
+vim.opt.undofile = true
 vim.opt.showmode = false
 vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.scrolloff = 10
+vim.opt.breakindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Navigate vim panes
 vim.keymap.set("n", "<c-h>", ":wincmd h<cr>")
@@ -33,21 +39,21 @@ vim.keymap.set("n", "<leader>bl", ":ls<cr>")
 
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("setlocal nonumber norelativenumber")
-	end,
+  pattern = "*",
+  callback = function()
+    vim.cmd("setlocal nonumber norelativenumber")
+  end,
 })
 
 local laststatus_toggle = 0
 local function toggle_statusbar()
-	if laststatus_toggle == 0 then
-		vim.o.laststatus = 0
-		laststatus_toggle = 1
-	else
-		vim.o.laststatus = 2
-		laststatus_toggle = 0
-	end
+  if laststatus_toggle == 0 then
+    vim.o.laststatus = 0
+    laststatus_toggle = 1
+  else
+    vim.o.laststatus = 2
+    laststatus_toggle = 0
+  end
 end
 
 vim.keymap.set("n", "<leader>vb", toggle_statusbar, { silent = true })
