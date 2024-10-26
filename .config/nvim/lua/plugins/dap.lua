@@ -12,16 +12,23 @@ return {
     -- Store previous tab/window
     local previous_tab = nil
     local previous_win = nil
+    local previous_cursor = nil
     local debug_tab = nil
     local is_debug_open = false
 
     local function _store_current_position()
       previous_tab = vim.api.nvim_get_current_tabpage()
       previous_win = vim.api.nvim_get_current_win()
+      previous_cursor = vim.api.nvim_win_get_cursor(0)
     end
 
     local function _create_debug_tab()
       vim.cmd('tabnew %')
+
+      if previous_cursor then
+        vim.api.nvim_win_set_cursor(0, previous_cursor)
+      end
+
       debug_tab = vim.api.nvim_get_current_tabpage()
       vim.cmd("TabRename DEBUG")
     end
@@ -45,10 +52,10 @@ return {
       debug_tab = nil
       previous_tab = nil
       previous_win = nil
+      previous_cursor = nil
       is_debug_open = false
     end
 
-    -- Public functions
     local function open_dap_in_tab()
       if is_debug_open then
         return
