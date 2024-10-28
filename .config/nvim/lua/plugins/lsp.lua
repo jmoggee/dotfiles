@@ -16,7 +16,6 @@ return {
       })
     end,
   },
-
   {
     "neovim/nvim-lspconfig",
     lazy = false,
@@ -66,8 +65,26 @@ return {
         end,
       })
 
-      lspconfig.csharp_ls.setup({
+      -- lspconfig.csharp_ls.setup({
+      --   capabilities = capabilities,
+      -- })
+
+      local function get_solution_path()
+        return "/Users/jean/Sandbox/HarambeePlatform/HarambeePlatform.sln"
+      end
+
+      local omnisharp_bin = "/usr/local/bin/omnisharp-roslyn/OmniSharp"
+      lspconfig.omnisharp.setup({
         capabilities = capabilities,
+        cmd = { omnisharp_bin, "--languageserver", "--hostPID=" .. tostring(pid), "-s", get_solution_path() },
+        cmd_env = {
+          DOTNET_ROOT = "/usr/local/share/dotnet/x64",
+          DOTNET_HOST_PATH = "/usr/local/share/dotnet/x64/dotnet",
+          MSBuildSDKsPath = "/usr/local/share/dotnet/x64/sdk/8.0.100/Sdks",
+          PATH = "/usr/local/share/dotnet/x64:" .. vim.env.PATH,
+          DYLD_LIBRARY_PATH = "/usr/local/lib",
+          ARCH = "x64",
+        },
       })
 
       vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, {})
