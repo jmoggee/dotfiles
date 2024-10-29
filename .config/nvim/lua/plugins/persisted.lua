@@ -19,10 +19,11 @@ return {
     })
     telescope.load_extension("persisted")
 
-    vim.keymap.set("n", "<leader>ss", function() telescope.extensions.persisted.persisted() end)
-    vim.keymap.set("n", "<leader>sn", persisted.start)
-    vim.keymap.set("n", "<leader>sk", persisted.stop)
-    vim.keymap.set("n", "<leader>sd", persisted.delete)
-    vim.keymap.set("n", "<leader>sl", function() persisted.load({ last = true }) end)
+    vim.keymap.set("n", "<leader>ss", function() telescope.extensions.persisted.persisted() end,
+      { desc = "Session Menu" })
+    vim.keymap.set("n", "<leader>sn", persisted.start, { desc = "Session New" })
+    vim.keymap.set("n", "<leader>sk", persisted.stop, { desc = "Session Stop" })
+    vim.keymap.set("n", "<leader>sd", persisted.delete, { desc = "Session Delete" })
+    vim.keymap.set("n", "<leader>sl", function() persisted.load({ last = true }) end, { desc = "Session Load Last" })
   end
 }

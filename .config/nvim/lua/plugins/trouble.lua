@@ -1,5 +1,6 @@
 return {
   "folke/trouble.nvim",
+
   opts = { use_diagnostic_signs = true },
   config = function()
     vim.keymap.set("n", "<leader>xx", function()

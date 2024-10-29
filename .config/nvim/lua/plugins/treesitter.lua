@@ -1,20 +1,21 @@
 return {
+  "nvim-treesitter/nvim-treesitter",
 
-	"nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
 
-	build = ":TSUpdate",
-
-	config = function()
-		local config = require("nvim-treesitter.configs")
-		config.setup({
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true },
+  config = function()
+    local config = require("nvim-treesitter.configs")
+    config.setup({
+      auto_install = true,
+      highlight = { enable = true },
+      indent = { enable = true },
       ensure_installed = {
         "bash",
         "c_sharp",
         "css",
         "dockerfile",
+        "gdscript",
+        "godot_resource",
         "html",
         "javascript",
         "json",
@@ -26,6 +27,6 @@ return {
         "python",
         "htmldjango"
       }
-		})
-	end,
+    })
+  end,
 }

@@ -9,7 +9,7 @@ return {
   },
 
   config = function()
-    vim.keymap.set("n", "<leader>fe", ":Neotree filesystem reveal left<cr>")
-    vim.keymap.set("n", "<leader>fv", ":Neotree position=current<cr>")
+    vim.keymap.set("n", "<leader>fe", ":Neotree filesystem reveal left<cr>", { desc = "File Tree (Left)" })
+    vim.keymap.set("n", "<leader>fv", ":Neotree position=current<cr>", { desc = "File Tree (Current Buffer)" })
   end,
 }
