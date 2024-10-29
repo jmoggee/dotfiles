@@ -2,7 +2,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
 
-    tag = "0.1.6",
     dependencies = { "nvim-lua/plenary.nvim" },
 
     config = function()
@@ -10,6 +9,8 @@ return {
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find Recent" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
+      vim.keymap.set("n", "<leader>??", builtin.help_tags, { desc = "Find Help" })
     end,
   },
 
@@ -25,6 +26,25 @@ return {
         },
       })
       require("telescope").load_extension("ui-select")
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+
+    config = function()
+      local telescope = require("telescope")
+      telescope.load_extension("frecency")
+
+      vim.keymap.set("n", "<leader>fy", function()
+        telescope.extensions.frecency.frecency()
+      end, { desc = "Search frequency in all files" })
+
+      vim.keymap.set("n", "<leader>fw", function()
+        telescope.extensions.frecency.frecency({
+          workspace = vim.fn.getcwd(),
+        })
+      end, { desc = "Search frequency in current workspace" })
     end,
   },
 }

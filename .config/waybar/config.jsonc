@@ -182,5 +182,17 @@
     "custom/cava_mviz": {
       "exec": "~/.config/waybar/scripts/waybar_cava.sh",
       "format": "{}"
+    },
+
+    "custom/weather": {
+      "format": "{}",
+      "format-alt": "{alt}: {}",
+      "format-alt-click": "click",
+      "interval": 3600,
+      "return-type": "json",
+      "exec": "~/.config/waybar/scripts/weather.sh",
+      "exec-if": "ping wttr.in -c1",
+      "tooltip" : true,
     }
+},
 }
