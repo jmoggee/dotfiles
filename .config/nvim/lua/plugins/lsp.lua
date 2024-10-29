@@ -50,6 +50,14 @@ return {
         },
       })
 
+      lspconfig.gdscript.setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig.gdshader_lsp.setup({
+        capabilities = capabilities,
+      })
+
       lspconfig.ruff_lsp.setup({
         capabilities = capabilities,
         on_attach = function(_client, bufnr)
@@ -70,13 +78,13 @@ return {
         capabilities = capabilities,
       })
 
-      vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, {})
+      vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Hover" })
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+      vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Reformat Code" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
+      vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, { desc = "Rename" })
 
       -- Format on save
       vim.api.nvim_create_autocmd("BufWritePre", {

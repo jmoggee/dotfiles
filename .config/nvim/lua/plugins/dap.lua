@@ -9,6 +9,26 @@ return {
   config = function()
     local dap, dapui = require("dap"), require("dapui")
 
+    -- Python
+    require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+
+    -- Godot
+    dap.adapters.godot = {
+      type = "server",
+      host = "127.0.0.1",
+      port = 6006,
+    }
+
+    dap.configurations.gdscript = {
+      {
+        type = "godot",
+        request = "launch",
+        name = "Launch scene",
+        project = "${workspaceFolder}",
+        launch_scene = true,
+      }
+    }
+
     -- Store previous tab/window
     local previous_tab = nil
     local previous_win = nil
@@ -84,8 +104,7 @@ return {
 
     dapui.setup({})
 
-    require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
-
+    -- Events
     dap.listeners.before.attach.dapui_config = function()
       open_dap_in_tab()
     end
@@ -104,11 +123,11 @@ return {
 
     require("dap.ext.vscode").load_launchjs()
 
-    vim.keymap.set("n", "<Leader>dd", dap.toggle_breakpoint, {})
-    vim.keymap.set("n", "<Leader>dl", function() dapui.float_element("breakpoints") end, {})
-    vim.keymap.set("n", "<F2>", dap.continue, {})
-    vim.keymap.set("n", "<F3>", dap.step_over, {})
-    vim.keymap.set("n", "<F4>", dap.step_into, {})
-    vim.keymap.set("n", "<F5>", dap.terminate, {})
+    vim.keymap.set("n", "<Leader>dd", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<Leader>dl", function() dapui.float_element("breakpoints") end, { desc = "List Breakpoints" })
+    vim.keymap.set("n", "<F2>", dap.continue, { desc = "Debug Continue" })
+    vim.keymap.set("n", "<F3>", dap.step_over, { desc = "Debug Step Over" })
+    vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug Step Into" })
+    vim.keymap.set("n", "<F5>", dap.terminate, { desc = "Debug Stop" })
   end,
 }
