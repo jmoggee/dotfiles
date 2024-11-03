@@ -11,6 +11,8 @@ return {
         null_ls.builtins.formatting.djlint,
         -- null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.gdlint,
+        null_ls.builtins.formatting.gdformat
       },
     })
   end,
