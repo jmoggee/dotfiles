@@ -86,6 +86,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias c="clear"
 alias tx="tmuxifier load-session"
+alias y="yazi"
 
 # Shell integrations
 eval "$(fzf --zsh)"
