@@ -1,18 +1,9 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-
-  build = ":TSUpdate",
-
-  config = function()
-    local config = require("nvim-treesitter.configs")
-    config.setup({
-      auto_install = true,
-      highlight = { enable = true },
-      indent = {
-        enable = true,
-        disable = { "gdscript" }
-      },
-      ensure_installed = {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      -- Add languages to the existing opts.ensure_installed table
+      vim.list_extend(opts.ensure_installed, {
         "bash",
         "c_sharp",
         "css",
@@ -28,8 +19,16 @@ return {
         "scss",
         "toml",
         "python",
-        "htmldjango"
-      }
-    })
-  end,
+        "htmldjango",
+      })
+
+      -- Modify indent settings
+      opts.indent = vim.tbl_deep_extend("force", opts.indent or {}, {
+        enable = true,
+        disable = { "gdscript" },
+      })
+
+      return opts
+    end,
+  },
 }

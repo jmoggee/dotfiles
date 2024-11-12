@@ -1,133 +1,37 @@
 return {
-  "mfussenegger/nvim-dap",
-  dependencies = {
-    "rcarriga/nvim-dap-ui",
-    "nvim-neotest/nvim-nio",
-    "mfussenegger/nvim-dap-python",
-    "nanozuki/tabby.nvim",
-  },
-  config = function()
-    local dap, dapui = require("dap"), require("dapui")
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      "mfussenegger/nvim-dap-python",
+    },
+    opts = function(_, opts)
+      local dap = require("dap")
 
-    -- Python
-    require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+      -- Python
+      require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
 
-    -- Godot
-    dap.adapters.godot = {
-      type = "server",
-      host = "127.0.0.1",
-      port = 6006,
-    }
-
-    dap.configurations.gdscript = {
-      {
-        type = "godot",
-        request = "launch",
-        name = "Launch scene",
-        project = "${workspaceFolder}",
-        launch_scene = true,
+      -- Godot configuration
+      dap.adapters.godot = {
+        type = "server",
+        host = "127.0.0.1",
+        port = 6006,
       }
-    }
 
-    -- Store previous tab/window
-    local previous_tab = nil
-    local previous_win = nil
-    local previous_cursor = nil
-    local debug_tab = nil
-    local is_debug_open = false
+      dap.configurations.gdscript = {
+        {
+          type = "godot",
+          request = "launch",
+          name = "Launch scene",
+          project = "${workspaceFolder}",
+          launch_scene = true,
+        },
+      }
 
-    local function _store_current_position()
-      previous_tab = vim.api.nvim_get_current_tabpage()
-      previous_win = vim.api.nvim_get_current_win()
-      previous_cursor = vim.api.nvim_win_get_cursor(0)
-    end
+      -- Load launch.json configurations
+      require("dap.ext.vscode").load_launchjs()
 
-    local function _create_debug_tab()
-      vim.cmd('tabnew %')
-
-      if previous_cursor then
-        vim.api.nvim_win_set_cursor(0, previous_cursor)
-      end
-
-      debug_tab = vim.api.nvim_get_current_tabpage()
-      vim.cmd("TabRename DEBUG")
-    end
-
-    local function _restore_previous_position()
-      if previous_tab and vim.api.nvim_tabpage_is_valid(previous_tab) then
-        vim.api.nvim_set_current_tabpage(previous_tab)
-        if previous_win and vim.api.nvim_win_is_valid(previous_win) then
-          vim.api.nvim_set_current_win(previous_win)
-        end
-      end
-    end
-
-    local function _close_debug_tab()
-      if debug_tab and vim.api.nvim_tabpage_is_valid(debug_tab) then
-        vim.cmd('silent! ' .. vim.api.nvim_tabpage_get_number(debug_tab) .. 'tabclose')
-      end
-    end
-
-    local function _reset_state()
-      debug_tab = nil
-      previous_tab = nil
-      previous_win = nil
-      previous_cursor = nil
-      is_debug_open = false
-    end
-
-    local function open_dap_in_tab()
-      if is_debug_open then
-        return
-      end
-
-      _store_current_position()
-      _create_debug_tab()
-      dapui.open()
-      is_debug_open = true
-    end
-
-    local function cleanup_dap_tab()
-      if not is_debug_open then
-        return
-      end
-
-      dapui.close()
-      _restore_previous_position()
-      _close_debug_tab()
-      _reset_state()
-    end
-
-    vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" })
-
-    dapui.setup({})
-
-    -- Events
-    dap.listeners.before.attach.dapui_config = function()
-      open_dap_in_tab()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      open_dap_in_tab()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      cleanup_dap_tab()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      cleanup_dap_tab()
-    end
-    dap.listeners.before.disconnect.dapui_config = function()
-      cleanup_dap_tab()
-    end
-
-    require("dap.ext.vscode").load_launchjs()
-
-    vim.keymap.set("n", "<Leader>dd", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    vim.keymap.set("n", "<Leader>dl", function() dapui.float_element("breakpoints") end, { desc = "List Breakpoints" })
-    vim.keymap.set("n", "<F2>", dap.continue, { desc = "Debug Continue" })
-    vim.keymap.set("n", "<F3>", dap.step_over, { desc = "Debug Step Over" })
-    vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug Step Into" })
-    vim.keymap.set("n", "<F5>", dap.terminate, { desc = "Debug Stop" })
-  end,
+      return opts
+    end,
+  },
 }

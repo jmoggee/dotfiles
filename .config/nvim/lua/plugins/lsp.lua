@@ -1,42 +1,22 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-    end,
-  },
+  "neovim/nvim-lspconfig",
+  opts = {
+    autoformat = true,
 
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    config = function()
-      require("mason-lspconfig").setup({
-        auto_install = true,
-      })
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    servers = {
 
-      local lspconfig = require("lspconfig")
+      typos_lsp = {},
+      lua_ls = {},
+      ts_ls = {},
+      gdscript = {},
+      gdshader_lsp = {},
 
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.basedpyright.setup({
-        capabilities = (function()
-          local updatedCapabilities = vim.lsp.protocol.make_client_capabilities()
-          updatedCapabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-          return updatedCapabilities
-        end)(),
+      basedpyright = {
+        capabilities = function()
+          local caps = vim.lsp.protocol.make_client_capabilities()
+          caps.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+          return caps
+        end,
         settings = {
           basedpyright = {
             disableOrganizeImports = true,
@@ -47,19 +27,10 @@ return {
             },
           },
         },
-      })
+      },
 
-      lspconfig.gdscript.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.gdshader_lsp.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.ruff_lsp.setup({
-        capabilities = capabilities,
-        on_attach = function(_client, bufnr)
+      ruff_lsp = {
+        on_attach = function(client, bufnr)
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
             callback = function()
@@ -71,45 +42,7 @@ return {
             end,
           })
         end,
-      })
-
-      -- lspconfig.csharp_ls.setup({
-      --   capabilities = capabilities,
-      -- })
-
-      local function get_solution_path()
-        return "/Users/jean/Sandbox/HarambeePlatform/HarambeePlatform.sln"
-      end
-
-      local omnisharp_bin = "/usr/local/bin/omnisharp-roslyn/OmniSharp"
-      lspconfig.omnisharp.setup({
-        capabilities = capabilities,
-        cmd = { omnisharp_bin, "--languageserver", "--hostPID=" .. tostring(pid), "-s", get_solution_path() },
-        cmd_env = {
-          DOTNET_ROOT = "/usr/local/share/dotnet/x64",
-          DOTNET_HOST_PATH = "/usr/local/share/dotnet/x64/dotnet",
-          MSBuildSDKsPath = "/usr/local/share/dotnet/x64/sdk/8.0.100/Sdks",
-          PATH = "/usr/local/share/dotnet/x64:" .. vim.env.PATH,
-          DYLD_LIBRARY_PATH = "/usr/local/lib",
-          ARCH = "x64",
-        },
-      })
-
-      vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Hover" })
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-      vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Go to definition" })
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-      vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Reformat Code" })
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-      vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, { desc = "Rename" })
-
-      -- Format on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
-    end,
+      },
+    },
   },
 }

@@ -1,13 +1,7 @@
 return {
-  "goolord/alpha-nvim",
-
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-
-  config = function()
-    local alpha = require("alpha")
-    local dashboard = require("alpha.themes.dashboard")
-
-    dashboard.section.header.val = {
+  "nvimdev/dashboard-nvim",
+  opts = function(_, opts)
+    local logo = {
       [[                                                                       ]],
       [[                                                                       ]],
       [[                                                                       ]],
@@ -25,20 +19,37 @@ return {
       [[                                                                       ]],
     }
 
-    dashboard.section.buttons.val = {
-      dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("r", "  Recently used files", ":Telescope oldfiles<CR>"),
-      dashboard.button("f", "󰱼  Find file", ":Telescope find_files<CR>"),
-      dashboard.button("t", "󱎸  Find text", ":Telescope live_grep <CR>"),
-      dashboard.button("s", "  Settings", ":e $HOME/.config/nvim/init.lua | :cd %:p:h | split . | wincmd k | pwd<CR>"),
-      dashboard.button("q", "󰈆  Quit NVIM", ":qa<CR>"),
-    }
+    opts.config.header = logo
 
+    -- Get fortune
+    local fortune = ""
     local handle = io.popen("fortune")
-    local fortune = handle:read("*a")
-    handle:close()
-    dashboard.section.footer.val = fortune
+    if handle then
+      fortune = handle:read("*a")
+      handle:close()
+    end
 
-    alpha.setup(dashboard.opts)
+    local original_footer = opts.config.footer
+
+    opts.config.footer = function()
+      local default_footer = original_footer and original_footer() or {}
+      local fortune_lines = vim.split(fortune, "\n", { trimempty = true })
+
+      table.insert(fortune_lines, 1, "")
+      table.insert(fortune_lines, 1, "─────────────────────")
+      table.insert(fortune_lines, 1, "")
+
+      if type(default_footer) == "table" then
+        for _, line in ipairs(fortune_lines) do
+          table.insert(default_footer, line)
+        end
+
+        return default_footer
+      else
+        return fortune_lines
+      end
+    end
+
+    return opts
   end,
 }
