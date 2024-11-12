@@ -11,12 +11,13 @@
 #waybar {
   background: transparent;
   color: @text;
-  font-size: 11px;
-  font-family: "JetbrainsMono Nerd Font";
+  font-size: 10px;
+  font-family: "CaskaydiaMono Nerd Font";
+  font-weight: bold;
 }
 
 #workspaces button {
-  padding-right: 5px;
+  padding-right: 2px;
   color: @text;
 }
 
@@ -38,8 +39,8 @@
 .modules-left,
 .modules-center,
 .modules-right {
-  margin: 5px 6px 0px 6px;
-  background: rgba(17, 17, 27, 0.7);
+  margin: 5px 6px 0 6px;
+  background: rgba(17, 17, 27, 0.8);
 }
 
 .modules-left {
@@ -51,6 +52,38 @@
 .modules-right {
   padding: 0 8px;
   border-radius: 8px;
+}
+
+#tray {
+  padding-top: 1px;
+}
+
+#clock {
+  color: @sky;
+}
+
+#custom-weather {
+  color: @teal;
+}
+
+#idle_inhibitor {
+  color: @green;
+}
+
+#cpu {
+  color: @yellow;
+}
+
+#memory {
+  color: @peach;
+}
+
+#pulseaudio {
+  color: @maroon;
+}
+
+#custom-cava_mviz {
+  color: @mauve;
 }
 
 #custom-powermenu,
@@ -66,5 +99,5 @@
 #pulseaudio,
 #tray,
 #network {
-  margin: 6px 4px;
+  margin: 5px;
 }

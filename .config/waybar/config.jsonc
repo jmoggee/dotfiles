@@ -8,6 +8,7 @@
     ],
     "modules-center": [
         "clock",
+        "custom/weather"
     ],
     "modules-right": [
         "tray",
@@ -80,8 +81,8 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
-        "spacing": 10
+        "icon-size": 12,
+        "spacing": 6
     },
     "clock": {
         // "timezone": "America/New_York",
