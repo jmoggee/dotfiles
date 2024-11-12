@@ -7,10 +7,10 @@ configuration{
   window-format: "{icon} {c}";
   location: 0;
   hide-scrollbar: true;
-  display-drun: "   Apps ";
-  display-run: "   Run ";
-  display-window: " 󰕰  Window";
-  display-Network: " 󰤨  Network";
+  display-drun: "     Apps   ";
+  display-run: "     Run   ";
+  display-window: " 󰕰    Window   ";
+  display-Network: " 󰤨    Network   ";
   sidebar-mode: true;
 
   sorting-method: "fzf";
@@ -20,6 +20,10 @@ configuration{
   historical-sort: true;
   persistent-history: true;
   cache-dir: "~/.cache/rofi/";
+
+  run,drun,window {
+    fallback-icon: "application-x-executable";
+  }
 }
 
 @theme "catppuccin-macchiato"

@@ -9,12 +9,13 @@
     grey: #6e738d;
 
     width: 600;
-    font: "JetBrainsMono Nerd Font 10";
+    font: "Cantarell 10";
 }
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;
     text-color:       inherit;
+    vertical-align: 0.5;
 }
 
 window {
