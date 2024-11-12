@@ -11,13 +11,31 @@
 #waybar {
   background: transparent;
   color: @text;
-  font-size: 10px;
+  font-size: 11px;
   font-family: "CaskaydiaMono Nerd Font";
   font-weight: bold;
 }
 
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 5px 6px 0 6px;
+  background: rgba(17, 17, 27, 0.9);
+}
+
+.modules-left {
+  padding: 0 4px;
+  border-radius: 30px;
+}
+
+.modules-center,
+.modules-right {
+  padding: 0 8px;
+  border-radius: 8px;
+}
+
 #workspaces button {
-  padding-right: 2px;
+  padding-right: 4px;
   color: @text;
 }
 
@@ -36,26 +54,8 @@
   color: @peach;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  margin: 5px 6px 0 6px;
-  background: rgba(17, 17, 27, 0.8);
-}
-
-.modules-left {
-  padding: 0 4px;
-  border-radius: 30px;
-}
-
-.modules-center,
-.modules-right {
-  padding: 0 8px;
-  border-radius: 8px;
-}
-
 #tray {
-  padding-top: 1px;
+  margin-top: 2px;
 }
 
 #clock {
@@ -83,7 +83,7 @@
 }
 
 #custom-cava_mviz {
-  color: @mauve;
+  color: @red;
 }
 
 #custom-powermenu,
@@ -99,5 +99,6 @@
 #pulseaudio,
 #tray,
 #network {
-  margin: 5px;
+  margin-left: -2px;
+  padding: 5px;
 }
