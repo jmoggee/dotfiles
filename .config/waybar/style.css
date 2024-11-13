@@ -20,18 +20,26 @@
 .modules-center,
 .modules-right {
   margin: 5px 6px 0 6px;
-  background: rgba(17, 17, 27, 0.9);
 }
 
-.modules-left {
-  padding: 0 4px;
-  border-radius: 30px;
+window#waybar.empty {
+  background: none;
 }
 
-.modules-center,
-.modules-right {
-  padding: 0 8px;
+#environment,
+#workspaces,
+#window,
+#tray,
+#resources,
+#custom-cava_mviz,
+#custom-exit {
+  background: rgba(17, 17, 27, 0.8);
   border-radius: 8px;
+  padding: 0 8px;
+}
+
+#workspaces {
+  border-radius: 30px;
 }
 
 #workspaces button {
@@ -52,6 +60,10 @@
 
 #workspaces button.urgent {
   color: @peach;
+}
+
+#window {
+  font-weight: normal;
 }
 
 #tray {
@@ -83,7 +95,17 @@
 }
 
 #custom-cava_mviz {
-  color: @red;
+  color: @mauve;
+}
+
+#custom-exit {
+  padding-left: 10px;
+  background: @red;
+  color: @mantle;
+}
+
+#custom-exit:hover {
+  background: @pink;
 }
 
 #custom-powermenu,
@@ -98,7 +120,7 @@
 #window,
 #pulseaudio,
 #tray,
-#network {
-  margin-left: -2px;
-  padding: 5px;
+#network,
+#custom-cava_mviz {
+  padding: 6px;
 }
