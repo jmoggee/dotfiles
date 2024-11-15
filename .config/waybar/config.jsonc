@@ -223,5 +223,9 @@
     "on-click": "wlogout",
     "tooltip-format": "Power Menu"
   },
+  "custom/appmenu": {
+    "format": "󰣇 ",
+    "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
+  },
 },
 }
