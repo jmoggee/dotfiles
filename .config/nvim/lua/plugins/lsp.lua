@@ -12,11 +12,7 @@ return {
       gdshader_lsp = {},
 
       basedpyright = {
-        capabilities = function()
-          local caps = vim.lsp.protocol.make_client_capabilities()
-          caps.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-          return caps
-        end,
+        capabilities = vim.lsp.protocol.make_client_capabilities(),
         settings = {
           basedpyright = {
             disableOrganizeImports = true,
