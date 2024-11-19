@@ -112,12 +112,12 @@ window#waybar.empty #window {
 
 #custom-exit {
   padding-left: 10px;
-  background: @red;
-  color: @mantle;
+  color: @red;
 }
 
 #custom-exit:hover {
-  background: @pink;
+  background: @red;
+  color: @mantle;
 }
 
 #custom-powermenu,
