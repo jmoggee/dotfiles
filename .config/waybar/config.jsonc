@@ -32,9 +32,9 @@
     "orientation": "inherit",
     "modules": [
       "idle_inhibitor",
+      "battery",
       "cpu",
       "memory",
-      "battery",
       "pulseaudio"
     ]
   },
@@ -95,7 +95,7 @@
     "tooltip-format": "{app}: {title}"
   },
   "idle_inhibitor": {
-    "format": "{icon}",
+    "format": "{icon} ",
     "format-icons": {
       "activated": " ",
       "deactivated": " "
