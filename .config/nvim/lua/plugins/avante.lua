@@ -3,7 +3,34 @@ return {
   event = "VeryLazy",
   lazy = false,
   version = false,
+  keys = {
+    { "<leader>am", "", desc = "avante: model" },
+    {
+      "<leader>amh",
+      function()
+        local avante = require("avante")
+        local model = "claude-3-5-haiku-20241022"
+        avante.setup({ provider = "claude", claude = { model = model } })
+        vim.notify("Switched to " .. model)
+      end,
+      desc = "Switch to claude-3-5-haiku-20241022",
+    },
+    {
+      "<leader>ams",
+      function()
+        local avante = require("avante")
+        local model = "claude-3-5-sonnet-20241022"
+        avante.setup({ provider = "claude", claude = { model = model } })
+        vim.notify("Switched to " .. model)
+      end,
+      desc = "Switch to claude-3-5-sonnet-20241022",
+    },
+  },
   opts = {
+    provider = "claude",
+    claude = {
+      model = "claude-3-5-haiku-20241022",
+    },
     auto_suggestions_provider = "copilot",
     behaviour = {
       auto_suggestions = true,
