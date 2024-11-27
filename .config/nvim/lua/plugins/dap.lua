@@ -8,6 +8,9 @@ return {
     opts = function(_, opts)
       local dap = require("dap")
 
+      vim.fn.mkdir(vim.fn.stdpath("cache") .. "/dap", "p")
+      dap.set_log_level("TRACE")
+
       -- Python
       require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
 
@@ -59,8 +62,6 @@ return {
           debugAutoInterpretAllModules = false,
         },
       }
-
-      dap.defaults.fallback.timeout = 10000
 
       -- Load launch.json configurations
       require("dap.ext.vscode").load_launchjs()
