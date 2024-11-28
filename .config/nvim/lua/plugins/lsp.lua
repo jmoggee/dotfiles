@@ -39,6 +39,17 @@ return {
           })
         end,
       },
+
+      elixir_ls = {
+        cmd = "elixir_ls",
+        settings = {
+          elixirLs = {
+            dialyzerEnabled = true,
+            fetchDeps = true,
+            suggestSpecs = true,
+          },
+        },
+      },
     },
   },
 }
