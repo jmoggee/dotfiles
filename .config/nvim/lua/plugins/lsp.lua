@@ -40,8 +40,8 @@ return {
         end,
       },
 
-      elixir_ls = {
-        cmd = "elixir_ls",
+      elixirls = {
+        cmd = { "elixir-ls" },
         settings = {
           elixirLs = {
             dialyzerEnabled = true,

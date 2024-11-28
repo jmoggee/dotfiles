@@ -5,6 +5,7 @@ return {
       django = { "djlint" },
       htmldjango = { "djlint" },
       gdscript = { "gdlint" },
+      elixir = { "credo" },
     },
   },
 }
