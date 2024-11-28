@@ -9,6 +9,13 @@ return {
         },
         opts = { skip = true },
       },
+      {
+        filter = {
+          event = "notify",
+          find = "Debug adapter didn't respond",
+        },
+        opts = { skip = true },
+      },
     },
   },
 }
