@@ -50,6 +50,15 @@ return {
           },
         },
       },
+
+      omnisharp = {
+        cmd = {
+          "/usr/local/bin/omnisharp-roslyn/OmniSharp",
+          "--languageserver",
+          "-s",
+          vim.fn.getcwd() .. "/" .. vim.fn.findfile("*.sln"),
+        },
+      },
     },
   },
 }
