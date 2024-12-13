@@ -1,17 +1,10 @@
 return {
-  {
-    "catppuccin/nvim",
-    lazy = false,
-    name = "catppuccin",
+	"catppuccin/nvim",
+	name = "catppuccin",
+	priority = 1000,
 
-    config = function()
-      require("catppuccin").setup()
-    end,
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
-  },
+	config = function()
+		require("catppuccin").setup()
+		vim.cmd.colorscheme("catppuccin-mocha")
+	end,
 }

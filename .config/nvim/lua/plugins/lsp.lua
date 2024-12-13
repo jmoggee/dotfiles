@@ -1,64 +1,44 @@
+local function discover_lsps()
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	local lspconfig = require("lspconfig")
+	local server_path = vim.fn.stdpath("config") .. "/lua/plugins/lsp"
+
+	for _, file in ipairs(vim.fn.readdir(server_path)) do
+		local server_name = file:gsub("%.lua$", "")
+		if server_name ~= "init" then
+			local server = require("plugins.lsp." .. server_name)
+			if type(server) == "table" then
+				server.capabilities = capabilities
+				lspconfig[server.name].setup(server)
+			end
+		end
+	end
+end
+
 return {
-  "neovim/nvim-lspconfig",
-  opts = {
-    autoformat = true,
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup()
+		end,
+	},
 
-    servers = {
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		config = function()
+			require("mason-lspconfig").setup({
+				auto_install = true,
+			})
+		end,
+	},
 
-      typos_lsp = {},
-      lua_ls = {},
-      ts_ls = {},
-      gdscript = {},
-      gdshader_lsp = {},
-
-      basedpyright = {
-        capabilities = vim.lsp.protocol.make_client_capabilities(),
-        settings = {
-          basedpyright = {
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              ignore = { "*" },
-            },
-          },
-        },
-      },
-
-      ruff_lsp = {
-        on_attach = function(client, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.code_action({
-                context = { only = { "source.organizeImports" } },
-                apply = true,
-              })
-              vim.wait(100)
-            end,
-          })
-        end,
-      },
-
-      elixirls = {
-        cmd = { "elixir-ls" },
-        settings = {
-          elixirLs = {
-            dialyzerEnabled = true,
-            fetchDeps = true,
-            suggestSpecs = true,
-          },
-        },
-      },
-
-      omnisharp = {
-        cmd = {
-          "/usr/local/bin/omnisharp-roslyn/OmniSharp",
-          "--languageserver",
-          "-s",
-          vim.fn.getcwd() .. "/" .. vim.fn.findfile("*.sln"),
-        },
-      },
-    },
-  },
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		config = function()
+			discover_lsps()
+		end,
+	},
 }
