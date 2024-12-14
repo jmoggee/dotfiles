@@ -1,0 +1,10 @@
+gui:
+  theme:
+    activeBorderColor:
+    - yellow
+    inactiveBorderColor:
+    - default
+    selectedLineBgColor:
+    - black
+    optionsTextColor:
+    - blue
