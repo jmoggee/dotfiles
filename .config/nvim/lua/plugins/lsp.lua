@@ -39,6 +39,10 @@ return {
     lazy = false,
     config = function()
       discover_lsps()
+
+      vim.keymap.set("n", "gl", function()
+        vim.diagnostic.open_float()
+      end)
     end,
   },
 }
