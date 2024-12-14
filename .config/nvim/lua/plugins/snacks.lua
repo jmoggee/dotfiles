@@ -30,7 +30,7 @@ local function header_section(git_root)
 		return {
 			section = "terminal",
 			cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 50x50; sleep .1",
-			height = 28,
+			height = 25,
 			padding = 1,
 			indent = 4,
 		}
@@ -68,6 +68,21 @@ local function git_sections(git_root)
 		function()
 			local cmds = {
 				{
+					pane = 2,
+					icon = " ",
+					title = "Git Status",
+					section = "terminal",
+					enabled = function()
+						return Snacks.git.get_root() ~= nil
+					end,
+					cmd = "hub status --short --branch --renames",
+					height = 5,
+					padding = 1,
+					ttl = 0,
+					indent = 3,
+				},
+
+				{
 					title = "Open Issues",
 					cmd = "gh issue list -L 8",
 					key = "i",
@@ -87,21 +102,6 @@ local function git_sections(git_root)
 						vim.fn.jobstart("gh pr list --web", { detach = true })
 					end,
 					height = 12,
-				},
-
-				{
-					pane = 2,
-					icon = " ",
-					title = "Git Status",
-					section = "terminal",
-					enabled = function()
-						return Snacks.git.get_root() ~= nil
-					end,
-					cmd = "hub status --short --branch --renames",
-					height = 5,
-					padding = 1,
-					ttl = 0,
-					indent = 3,
 				},
 			}
 

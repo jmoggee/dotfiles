@@ -6,7 +6,6 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "99290b3ec1322070bcfb9e846450a46f6efa50f0" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "conform.nvim": { "branch": "master", "commit": "f4e8837878fc5712d053ba3091a73d27d96a09e2" },
-  "copilot.lua": { "branch": "master", "commit": "d3783b9283a7c35940ed8d71549030d5f5f9f980" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "fc78a3ca96f4db9f8893bb7e2fd9823e0780451b" },
   "flash.nvim": { "branch": "main", "commit": "34c7be146a91fec3555c33fe89c7d643f6ef5cf1" },
@@ -30,6 +29,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "33d27173876499a0f037cb9edff90d583711b6ae" },
   "nvim-web-devicons": { "branch": "master", "commit": "dd0c15170f9ab2ffac695d90212318c05078751d" },
   "oil.nvim": { "branch": "master", "commit": "dba037598843973b8c54bc5ce0318db4a0da439d" },
+  "persisted.nvim": { "branch": "main", "commit": "e9a179271b1c7888e0a87448b3cf81652a6606c1" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "8d9a5debf473658c0d1d73fcb51bad1d9aecbf75" },
   "render-markdown.nvim": { "branch": "main", "commit": "e41b0002fe4196825450ab5a6343300c40791d51" },
@@ -41,7 +41,5 @@
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "todo-comments.nvim": { "branch": "main", "commit": "ae0a2afb47cf7395dc400e5dc4e05274bf4fb9e0" },
   "treewalker.nvim": { "branch": "main", "commit": "ff488544f8c937b89f6a5b19a99fe2992a533a30" },
-  "vim-sleuth": { "branch": "master", "commit": "be69bff86754b1aa5adcbb527d7fcd1635a84080" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "424b5caa154bff34dc258ee53cec5a8e36cf7ea8" },
-  "vim-zellij-navigator.nvim": { "branch": "main", "commit": "380d6d55d13fe60f91ac0c8303749c2c12fdc85a" }
+  "vim-sleuth": { "branch": "master", "commit": "be69bff86754b1aa5adcbb527d7fcd1635a84080" }
 }
