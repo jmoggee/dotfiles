@@ -23,15 +23,15 @@ vim.opt.signcolumn = "yes"
 --  How to display certain whitespace characters in the editor.
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "» ",
-	trail = "·",
-	nbsp = "␣",
+  tab = "» ",
+  trail = "·",
+  nbsp = "␣",
 }
 
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("setlocal nonumber norelativenumber")
-	end,
+  pattern = "*",
+  callback = function()
+    vim.cmd("setlocal nonumber norelativenumber")
+  end,
 })

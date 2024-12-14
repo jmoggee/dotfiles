@@ -1,10 +1,10 @@
 return {
-	name = "lua_ls",
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-		},
-	},
+  name = "lua_ls",
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
 }
