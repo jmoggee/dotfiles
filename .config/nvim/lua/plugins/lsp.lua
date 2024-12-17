@@ -1,5 +1,5 @@
 local function discover_lsps()
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
+  local capabilities = require("blink.cmp").get_lsp_capabilities()
   local lspconfig = require("lspconfig")
   local server_path = vim.fn.stdpath("config") .. "/lua/plugins/lsp"
 
