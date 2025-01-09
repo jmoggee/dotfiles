@@ -50,9 +50,6 @@ alias vim="nvim"
 alias ls="eza --icons=auto"
 alias la="eza --icons=auto -la"
 
-# Sources
-source /opt/asdf-vm/asdf.sh
-
 # Evals
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
