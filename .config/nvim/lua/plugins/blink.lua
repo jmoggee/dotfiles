@@ -32,6 +32,7 @@ return {
     },
 
     snippets = {
+      preset = "luasnip",
       expand = function(snippet)
         require("luasnip").lsp_expand(snippet)
       end,
@@ -49,7 +50,7 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      default = { "lsp", "path", "luasnip", "buffer", "codecompanion" },
+      default = { "lsp", "path", "snippets", "buffer", "codecompanion" },
       -- optionally disable cmdline completions
       -- cmdline = {},
       providers = {

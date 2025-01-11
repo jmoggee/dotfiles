@@ -17,3 +17,10 @@ vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<C-Tab>", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<leader><Tab>x", ":tabclose<cr>", { desc = "Close tab" })
+
+-- LSP
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "Code actions" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
+vim.keymap.set("n", "gr", vim.lsp.buf.rename, { desc = "Rename" })

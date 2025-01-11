@@ -28,10 +28,6 @@ vim.opt.listchars = {
   nbsp = "␣",
 }
 
--- Spell checking
-vim.opt.spell = true
-vim.opt.spelllang = "en_gb"
-
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",

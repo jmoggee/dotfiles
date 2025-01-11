@@ -7,3 +7,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.softtabstop = 4
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.cshtml", "*.razor" },
+  callback = function()
+    vim.bo.filetype = "razor"
+  end,
+})

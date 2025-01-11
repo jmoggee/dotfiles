@@ -30,7 +30,7 @@ local function header_section(git_root)
     return {
       section = "terminal",
       cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 42x42; sleep .1",
-      height = 20,
+      height = 24,
       padding = 1,
       indent = 4,
     }
