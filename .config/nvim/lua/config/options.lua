@@ -35,3 +35,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("setlocal nonumber norelativenumber")
   end,
 })
+
+if vim.g.neovide then
+  vim.o.guifont = "ZedMono Nerd Font:h11"
+end
