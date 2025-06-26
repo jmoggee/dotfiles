@@ -23,7 +23,7 @@
 }
 
 window#waybar.empty #window {
-  background: none;
+  background-color: transparent;
 }
 
 #environment,
@@ -55,23 +55,31 @@ window#waybar.empty #window {
 }
 
 #workspaces button {
-  padding-right: 4px;
+  margin-right: 2px;
+  padding: 1px;
+  color: @red;
+  border-radius: 30px;
+}
+
+#workspaces button.empty {
+  background: none;
   color: @text;
 }
 
-#workspaces button:hover {
-  background: none;
-  border: none;
-  box-shadow: none;
-  color: white;
-}
-
 #workspaces button.active {
-  color: @red;
+  background-color: @red;
+  color: @base;
 }
 
 #workspaces button.urgent {
-  color: @peach;
+  background-color: @peach;
+  color: @base;
+}
+
+#workspaces button:hover {
+  background: @text;
+  box-shadow: none;
+  color: @base;
 }
 
 #window {

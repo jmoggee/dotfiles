@@ -24,6 +24,16 @@ return {
 
     dapui.setup()
 
+    -- Setup Elixir debugger
+    dap.adapters.mix_task = {
+      type = 'executable',
+      command = vim.fn.expand("~/.local/share/nvim/mason/packages/elixir-ls/debug_adapter.sh"),
+      args = {},
+      options = {
+        initialize_timeout_sec = 300
+      }
+    }
+
     -- Setup .NET debugger
     dap.adapters.coreclr = {
       type = "executable",
@@ -46,8 +56,8 @@ return {
 
     require("dap.ext.vscode").load_launchjs()
 
-    vim.keymap.set("n", "<Leader>dd", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    vim.keymap.set("n", "<Leader>dl", function()
+    vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<leader>dl", function()
       dapui.float_element("breakpoints")
     end, { desc = "List Breakpoints" })
     vim.keymap.set("n", "<F2>", dap.continue, { desc = "Debug Continue" })
