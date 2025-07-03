@@ -1,0 +1,364 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LUKS_DEVICE="/dev/sdc1"
+LUKS_NAME=blackarch_crypt
+DISPLAY_NUM="${DISPLAY:-:1}"
+MOUNT_POINT="/var/lib/machines/blackarch"
+CONTAINER_NAME="blackarch"
+CONTAINER_USER="0xde"
+
+function unlock_and_mount() {
+  if ! sudo mountpoint -q "$MOUNT_POINT"; then
+    if ! sudo cryptsetup status "$LUKS_NAME" &>/dev/null; then
+      echo "Unlocking LUKS device..."
+      sudo cryptsetup luksOpen "$LUKS_DEVICE" "$LUKS_NAME"
+    else
+      echo "LUKS device $LUKS_NAME already unlocked"
+    fi
+    echo "Mounting filesystem..."
+    sudo mount "/dev/mapper/$LUKS_NAME" "$MOUNT_POINT"
+  else
+    echo "$MOUNT_POINT already mounted"
+  fi
+}
+
+function setup_xhost() {
+  echo "Checking X access for $CONTAINER_USER"
+  if ! xhost | grep -qw "SI:localuser:$CONTAINER_USER"; then
+    echo "Allowing X access for $CONTAINER_USER"
+    if ! xhost +SI:localuser:"$CONTAINER_USER" &>/dev/null; then
+      echo "Falling back to insecure 'xhost +'"
+      xhost +
+    fi
+  else
+    echo "X access for $CONTAINER_USER already allowed"
+  fi
+}
+
+function bind_home() {
+  CONTAINER_HOME="$MOUNT_POINT/home/$CONTAINER_USER"
+  BIND_HOME="$HOME/$CONTAINER_USER"
+
+  mkdir -p "$BIND_HOME"
+  if ! sudo mountpoint -q "$BIND_HOME"; then
+    echo "Bind mounting $BIND_HOME"
+    sudo mount --bind "$CONTAINER_HOME" "$BIND_HOME"
+  else
+    echo "$BIND_HOME already bound"
+  fi
+}
+
+function container_is_running() {
+  machinectl show "$CONTAINER_NAME" --property=State 2>/dev/null | grep -q '^State=running$'
+}
+
+function stop_container() {
+  if machinectl show "$CONTAINER_NAME" --property=State 2>/dev/null | grep -q '^State=running$'; then
+    echo "Stopping container $CONTAINER_NAME..."
+    sudo machinectl poweroff "$CONTAINER_NAME"
+
+    # Wait for container to fully stop
+    echo "Waiting for container to stop..."
+    local timeout=30
+    local count=0
+    while [ $count -lt $timeout ]; do
+      if ! machinectl show "$CONTAINER_NAME" --property=State 2>/dev/null | grep -q '^State=running$'; then
+        echo "Container stopped successfully"
+        return 0
+      fi
+      sleep 1
+      count=$((count + 1))
+    done
+    echo "Warning: Container may not have stopped cleanly"
+  else
+    echo "Container $CONTAINER_NAME is not running"
+  fi
+}
+
+function open_shell() {
+  echo "Opening shell in container as $CONTAINER_USER..."
+  sudo machinectl shell --setenv=DISPLAY=$DISPLAY_NUM "$CONTAINER_USER@$CONTAINER_NAME"
+}
+
+function unmount_bind_home() {
+  BIND_HOME="$HOME/$CONTAINER_USER"
+  if sudo mountpoint -q "$BIND_HOME"; then
+    echo "Unmounting bind mount $BIND_HOME..."
+    sudo umount "$BIND_HOME" || {
+      echo "Warning: Failed to unmount bind mount $BIND_HOME"
+      return 1
+    }
+    rm -rf "$BIND_HOME"
+  fi
+}
+
+function unmount_fs() {
+  if sudo mountpoint -q "$MOUNT_POINT"; then
+    echo "Unmounting $MOUNT_POINT..."
+  fi
+
+  local retries=10
+  for ((i=0; i<retries; i++)); do
+    if sudo mountpoint -q "$MOUNT_POINT"; then
+      if sudo umount "$MOUNT_POINT" 2>/dev/null; then
+        echo "Successfully unmounted $MOUNT_POINT"
+        return 0
+      else
+        echo "Attempt $((i+1))/$retries: Failed to unmount $MOUNT_POINT"
+        if [ $i -lt $((retries-1)) ]; then
+          echo "Waiting before retry..."
+          sleep 2
+        fi
+      fi
+    else
+      echo "$MOUNT_POINT is not mounted"
+      return 0
+    fi
+  done
+  
+  if sudo mountpoint -q "$MOUNT_POINT"; then
+    echo "Failed to unmount $MOUNT_POINT after $retries attempts."
+    echo "You may need to manually check what's using the mount:"
+    check_mount_usage "$MOUNT_POINT"
+    return 1
+  fi
+}
+
+function check_mount_usage() {
+  local mount_point="$1"
+  echo "Checking what's using $mount_point:"
+  sudo lsof +f -- "$mount_point" 2>/dev/null || echo "No processes found using $mount_point"
+}
+
+function kill_luks_holders() {
+  local dev_path="/dev/mapper/$LUKS_NAME"
+  local pids
+
+  echo "Checking what's using $dev_path:"
+  pids=$(sudo lsof -t "$dev_path" 2>/dev/null || true)
+
+  if [ -n "$pids" ]; then
+    echo "Killing processes holding $dev_path: $pids"
+    sudo kill -TERM $pids 2>/dev/null || true
+    sleep 3
+
+    pids=$(sudo lsof -t "$dev_path" 2>/dev/null || true)
+    if [ -n "$pids" ]; then
+      echo "Force killing remaining processes: $pids"
+      sudo kill -KILL $pids 2>/dev/null || true
+      sleep 1
+    fi
+
+    pids=$(sudo lsof -t "$dev_path" 2>/dev/null || true)
+    if [ -n "$pids" ]; then
+      echo "Warning: Some processes may still be holding $dev_path: $pids"
+      return 1
+    else
+      echo "All processes holding $dev_path have been terminated"
+    fi
+  else
+    echo "No processes holding $dev_path."
+  fi
+}
+
+function lock_luks() {
+  if sudo cryptsetup status "$LUKS_NAME" &>/dev/null; then
+    kill_luks_holders
+
+    # Try to close LUKS device with retries
+    local retries=5
+    for ((i=0; i<retries; i++)); do
+      echo "Attempting to close LUKS device $LUKS_NAME (attempt $((i+1))/$retries)..."
+
+      if sudo cryptsetup luksClose "$LUKS_NAME" 2>/dev/null; then
+        echo "LUKS device closed successfully."
+        return 0
+      else
+        echo "Failed to close LUKS device (attempt $((i+1))/$retries)"
+
+        if [ $i -lt $((retries-1)) ]; then
+          echo "Waiting before retry..."
+          sleep 3
+
+          kill_luks_holders
+        fi
+      fi
+    done
+
+    # If normal close failed, try force close
+    echo "Attempting force close of LUKS device..."
+    if sudo cryptsetup luksClose "$LUKS_NAME" --force 2>/dev/null; then
+      echo "LUKS device force closed successfully."
+    else
+      echo "Warning: Failed to close LUKS device $LUKS_NAME even with force option."
+      echo "You may need to reboot or manually close it later."
+      return 1
+    fi
+  else
+    echo "LUKS device $LUKS_NAME is not open."
+  fi
+}
+
+function start_container() {
+  echo "Starting BlackArch container..."
+  sudo systemd-nspawn \
+    -D "$MOUNT_POINT" \
+    -M blackarch \
+    --bind=/tmp/.X11-unix \
+    --bind=/dev/net/tun \
+    --setenv=DISPLAY="$DISPLAY_NUM" \
+    --boot \
+    --quiet \
+    --capability=all \
+    --private-users=no \
+    "$@" < /dev/null &> /dev/null
+  }
+
+function start_dark() {
+  unlock_and_mount
+  setup_xhost
+  bind_home
+
+  if container_is_running; then
+    echo "Container $CONTAINER_NAME is already running."
+  else
+    echo "Starting container..."
+    start_container &
+  
+    while true; do
+      if machinectl status "$CONTAINER_NAME" &>/dev/null; then
+        STATE=$(machinectl show "$CONTAINER_NAME" --property=State 2>/dev/null | grep '^State=' | cut -d= -f2)
+        echo "Machine exists. State: $STATE"
+        if [[ "$STATE" == "running" ]]; then
+          echo "Running"
+          break
+        fi
+      else
+        echo "Machine not yet known"
+      fi
+      sleep 1
+    done
+  fi
+
+}
+
+function stop_dark() {
+  echo "Stopping BlackArch container and cleaning up..."
+
+  stop_container
+
+  echo "Waiting for container to fully release filesystem references..."
+  sleep 5
+
+  if ! unmount_fs; then
+    echo "Warning: Could not unmount main filesystem, trying to unmount bind mount first..."
+    unmount_bind_home
+    sleep 2
+    if ! unmount_fs; then
+      echo "Warning: Still could not unmount filesystem, attempting to close LUKS anyway..."
+    fi
+  else
+    echo "Main filesystem unmounted successfully, unmounting bind mount..."
+    unmount_bind_home
+  fi
+
+  kill_luks_holders
+  lock_luks
+
+  echo "BlackArch container stopped and cleaned up"
+}
+
+function check_luks_references() {
+  local dev_path="/dev/mapper/$LUKS_NAME"
+  echo "Checking for remaining references to $LUKS_NAME:"
+
+  # Check device mapper
+  if [ -e "$dev_path" ]; then
+    echo "  - Device mapper entry exists: $dev_path"
+  else
+    echo "  - Device mapper entry does not exist"
+  fi
+
+  # Check /proc/mounts
+  if grep -q "$LUKS_NAME" /proc/mounts 2>/dev/null; then
+    echo "  - Found in /proc/mounts:"
+    grep "$LUKS_NAME" /proc/mounts
+  else
+    echo "  - Not found in /proc/mounts"
+  fi
+
+  # Check /proc/partitions
+  if grep -q "$LUKS_NAME" /proc/partitions 2>/dev/null; then
+    echo "  - Found in /proc/partitions:"
+    grep "$LUKS_NAME" /proc/partitions
+  else
+    echo "  - Not found in /proc/partitions"
+  fi
+
+  # Check dmsetup
+  if sudo dmsetup info "$LUKS_NAME" &>/dev/null; then
+    echo "  - Device mapper shows device as active"
+  else
+    echo "  - Device mapper shows device as inactive"
+  fi
+}
+
+function force_cleanup() {
+  echo "Performing force cleanup..."
+
+  # Kill any processes that might be holding the device
+  local pids
+  pids=$(sudo lsof -t /dev/mapper/blackarch_crypt 2>/dev/null || true)
+  if [ -n "$pids" ]; then
+    echo "Force killing all processes using LUKS device: $pids"
+    sudo kill -KILL $pids 2>/dev/null || true
+  fi
+
+  # Try to unmount with force
+  if sudo mountpoint -q "$MOUNT_POINT"; then
+    echo "Force unmounting $MOUNT_POINT..."
+    sudo umount -f "$MOUNT_POINT" 2>/dev/null || true
+  fi
+
+  # Try to unmount bind mount with force
+  BIND_HOME="$HOME/$CONTAINER_USER"
+  if sudo mountpoint -q "$BIND_HOME"; then
+    echo "Force unmounting bind mount $BIND_HOME..."
+    sudo umount -f "$BIND_HOME" 2>/dev/null || true
+  fi
+
+  # Wait a moment
+  sleep 2
+
+  # Try force close LUKS
+  if sudo cryptsetup status "$LUKS_NAME" &>/dev/null; then
+    echo "Force closing LUKS device..."
+    sudo cryptsetup luksClose "$LUKS_NAME" --force 2>/dev/null || true
+  fi
+
+  echo "Force cleanup completed"
+}
+
+case "${1:-}" in
+  start)
+    start_dark
+    ;;
+
+  stop)
+    stop_dark
+    ;;
+
+  force-stop)
+    force_cleanup
+    ;;
+
+  shell)
+    open_shell
+    ;;
+
+  *) 
+    echo "Usage: dark {start|stop|force-stop|shell}"
+    exit 1
+    ;;
+esac

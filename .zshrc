@@ -30,25 +30,31 @@ bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 
 # History
-HISTSIZE=100000
 HISTFILE=~/.zsh_history
+HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 
-setopt appendhistory
-setopt sharehistory
+setopt inc_append_history 
+setopt share_history
+setopt extended_history 
+setopt appendhistory 
 setopt hist_ignore_space
-setopt hist_ignore_all_dups
-
-# Exports
-export EDITOR="nvim"
-export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Aliases
-alias v="nvim"
-alias vim="nvim"
-alias ls="eza --icons=auto"
-alias la="eza --icons=auto -la"
+alias ls="exa --icons=auto"
+alias la="exa --icons=auto -la"
+alias grep="grep --color=auto"
+alias pry="iex --dbg pry -S mix"
+
+# Exports
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$PATH"
+export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Evals
 eval "$(fzf --zsh)"
