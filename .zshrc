@@ -52,10 +52,6 @@ export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 # Evals
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"

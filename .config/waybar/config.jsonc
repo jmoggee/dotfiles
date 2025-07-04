@@ -23,8 +23,7 @@
   "group/environment": {
     "orientation": "inherit",
     "modules": [
-      "clock",
-      "custom/weather"
+      "clock"
     ]
   },
 

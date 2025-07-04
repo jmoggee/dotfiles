@@ -1,3 +1,8 @@
 alias p=paru
 
-source /opt/asdf-vm/asdf.sh
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export STEAMLIBRARY=$HOME/.steam/steam
+export PROTON=$STEAMLIBRARY/steamapps/common/Proton\ -\ Experimental/files
