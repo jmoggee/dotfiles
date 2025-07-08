@@ -340,6 +340,17 @@ function force_cleanup() {
   echo "Force cleanup completed"
 }
 
+function run() {
+  if [ $# -eq 0 ]; then
+    echo "Error: Missing command to run in dark"
+    echo "Usage: dark run <command>"
+    exit 1
+  fi
+  local cmd=("$@")
+
+  sudo machinectl shell --setenv=DISPLAY=$DISPLAY_NUM "$CONTAINER_USER@$CONTAINER_NAME" /usr/bin/zsh -c "${cmd[*]}"
+}
+
 case "${1:-}" in
   start)
     start_dark
@@ -357,8 +368,12 @@ case "${1:-}" in
     open_shell
     ;;
 
+  run)
+    run "${@:2}"
+    ;;
+
   *) 
-    echo "Usage: dark {start|stop|force-stop|shell}"
+    echo "Usage: dark {start|stop|force-stop|shell|run}"
     exit 1
     ;;
 esac
