@@ -1,1 +1,5 @@
-/home/jean/.steam/steam/steamapps/common/Rocksmith2014/start-script/rocksmith-launcher.sh
+#!/bin/bash
+
+cd /home/jean/.steam/steam/steamapps/common/Rocksmith2014/
+PIPEWIRE_LATENCY="256/48000" \
+SteamAppId=221680 STEAM_COMPAT_CLIENT_INSTALL_PATH=/home/jean/.local/share/Steam SteamGameId=221680 STEAM_COMPAT_SHADER_PATH=/home/jean/.local/share/Steam/steamapps/shadercache/221680 STEAM_COMPAT_MEDIA_PATH=/home/jean/.local/share/Steam/steamapps/shadercache/221680/fozmediav1 STEAM_COMPAT_INSTALL_PATH=/home/jean/.local/share/Steam/steamapps/common/Rocksmith2014 STEAM_COMPAT_APP_ID=221680 STEAM_COMPAT_DATA_PATH=/home/jean/.local/share/Steam/steamapps/compatdata/221680 SteamClientLaunch=1 SteamOverlayGameId=221680 SteamEnv=1 /home/jean/.local/share/Steam/steamapps/common/SteamLinuxRuntime_sniper/pressure-vessel/bin/steam-runtime-launcher-interface-0 container-runtime "/home/jean/.local/share/Steam/steamapps/common/Proton - Experimental/proton" waitforexitandrun "/home/jean/.local/share/Steam/steamapps/common/Rocksmith2014/Rocksmith2014.exe" -uplay_steam_mode
