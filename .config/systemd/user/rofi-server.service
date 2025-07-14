@@ -1,0 +1,13 @@
+[Unit]
+Description=Rofi server for triggering rofi -show drun
+After=default.target
+
+[Service]
+ExecStart=/home/0xde/scripts/rofi-server server
+Restart=on-failure
+RestartSec=2
+Environment=DISPLAY=:1
+Environment=XAUTHORITY=%h/.Xauthority
+
+[Install]
+WantedBy=default.target

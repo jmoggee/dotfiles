@@ -1,0 +1,28 @@
+#!/bin/bash
+
+FIFO="/tmp/rofi-server.fifo"
+
+cleanup() {
+    echo "Stopping Rofi server..."
+    rm -f "$FIFO"
+    exit 0
+}
+
+trap cleanup SIGINT SIGTERM
+
+if [[ $1 == "server" ]]; then
+    [[ -p "$FIFO" ]] || mkfifo "$FIFO"
+    echo "Listening on $FIFO"
+    while true; do
+        read _ < "$FIFO"
+        echo "Trigger received. Launching Rofi..."
+        rofi -show drun
+    done
+else
+    if [[ ! -p "$FIFO" ]]; then
+        echo "Rofi server not running!"
+        exit 1
+    fi
+    echo "trigger" > "$FIFO"
+    echo "Triggered"
+fi

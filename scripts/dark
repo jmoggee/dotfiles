@@ -7,6 +7,7 @@ DISPLAY_NUM="${DISPLAY:-:1}"
 MOUNT_POINT="/var/lib/machines/blackarch"
 CONTAINER_NAME="blackarch"
 CONTAINER_USER="0xde"
+ROFI_SERVER=/home/0xde/scripts/rofi-server
 
 function unlock_and_mount() {
   if ! sudo mountpoint -q "$MOUNT_POINT"; then
@@ -231,7 +232,7 @@ function start_dark() {
         STATE=$(machinectl show "$CONTAINER_NAME" --property=State 2>/dev/null | grep '^State=' | cut -d= -f2)
         echo "Machine exists. State: $STATE"
         if [[ "$STATE" == "running" ]]; then
-          echo "Running"
+          echo "Machine confirmed running"
           break
         fi
       else
@@ -351,13 +352,32 @@ function run() {
   sudo machinectl shell --setenv=DISPLAY=$DISPLAY_NUM "$CONTAINER_USER@$CONTAINER_NAME" /usr/bin/zsh -c "${cmd[*]}"
 }
 
+function rofi() {
+  if machinectl show "$CONTAINER_NAME" --property=State | grep -q 'State=running'; then
+    machinectl shell "$CONTAINER_USER@$CONTAINER_NAME" "$ROFI_SERVER"
+  fi
+}
+
+function hypr_bind() {
+  echo "Binding rofi to SUPER + CTRL + SPACE in host hyprland"
+  hyprctl keyword \
+    bind "SUPER CTRL, Space, exec, ~/scripts/dark rofi" &> /dev/null
+}
+
+function hypr_unbind() {
+  echo "Unbindng rofi in host hyprland"
+  hyprctl keyword unbind "SUPER CTRL, Space" &> /dev/null
+}
+
 case "${1:-}" in
   start)
     start_dark
+    hypr_bind
     ;;
 
   stop)
     stop_dark
+    hypr_unbind
     ;;
 
   force-stop)
@@ -370,6 +390,10 @@ case "${1:-}" in
 
   run)
     run "${@:2}"
+    ;;
+
+  rofi)
+    rofi
     ;;
 
   *) 
