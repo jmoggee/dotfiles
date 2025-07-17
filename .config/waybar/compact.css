@@ -11,7 +11,7 @@
 #waybar {
   background: @mantle;
   color: @text;
-  font-size: 11px;
+  font-size: 9px;
   font-family: "CaskaydiaMono Nerd Font";
   font-weight: bold;
 }
@@ -28,7 +28,7 @@ window#waybar.empty #window {
 #custom-cava_mviz,
 #custom-appmenu,
 #custom-exit {
-  padding: 0 8px;
+  padding: 0 3px;
 }
 
 #custom-appmenu {
@@ -44,9 +44,8 @@ window#waybar.empty #window {
 
 #workspaces button {
   margin-right: 2px;
-  padding: 1px;
+  padding: 0 1px;
   color: @red;
-  border-radius: 30px;
 }
 
 #workspaces button.empty {
@@ -134,5 +133,5 @@ window#waybar.empty #window {
 #tray,
 #network,
 #custom-cava_mviz {
-  padding: 6px;
+  padding: 3px;
 }

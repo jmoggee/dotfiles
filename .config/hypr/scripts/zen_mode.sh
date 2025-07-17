@@ -38,6 +38,8 @@ enable_no_gaps() {
   hyprctl keyword general:gaps_out 0
   hyprctl keyword decoration:rounding 0
   hyprctl keyword general:border_size $ZEN_BORDER_WIDTH
+  hyprctl keyword animations:enabled 0
+  hyprctl keyword decoration:shadow:enabled 0
 }
 
 enable_zen_mode() {
@@ -61,6 +63,8 @@ disable_zen_mode() {
   hyprctl keyword general:gaps_out $DEFAULT_GAPS_OUT
   hyprctl keyword decoration:rounding $DEFAULT_ROUNDING
   hyprctl keyword general:border_size $DEFAULT_BORDER_WIDTH
+  hyprctl keyword animations:enabled 1
+  hyprctl keyword decoration:shadow:enabled 1
 }
 
 # Handle mode switching based on arguments
