@@ -2,9 +2,10 @@ return {
   "saghen/blink.cmp",
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
-  dependencies = { 
+  dependencies = {
     "Kaiser-Yang/blink-cmp-avante",
-    "L3MON4D3/LuaSnip", version = "v2.*"
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
   },
 
   -- use a release tag to download pre-built binaries
@@ -53,22 +54,10 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      default = { "avante", "lsp", "path", "snippets", "buffer", "codecompanion" },
+      default = { "lsp", "path", "snippets", "buffer" },
       -- optionally disable cmdline completions
       -- cmdline = {},
-      providers = {
-        avante = {
-          module = "blink-cmp-avante",
-          name = "Avante",
-          opts = {}
-        },
-
-        codecompanion = {
-          name = "CodeCompanion",
-          module = "codecompanion.providers.completion.blink",
-          enabled = true,
-        },
-      },
+      providers = {},
     },
 
     completion = {

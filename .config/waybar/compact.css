@@ -44,7 +44,7 @@ window#waybar.empty #window {
 
 #workspaces button {
   margin-right: 2px;
-  padding: 0 1px;
+  padding: 0;
   color: @red;
 }
 
@@ -110,7 +110,7 @@ window#waybar.empty #window {
 }
 
 #custom-exit {
-  padding-left: 10px;
+  padding-left: 7px;
   color: @red;
 }
 
@@ -124,7 +124,6 @@ window#waybar.empty #window {
 #custom-weather,
 #temperature,
 #memory,
-#workspaces,
 #custom-changebg,
 #custom-cmus,
 #clock,
@@ -134,4 +133,8 @@ window#waybar.empty #window {
 #network,
 #custom-cava_mviz {
   padding: 3px;
+}
+
+#workspaces {
+  padding: 0;
 }

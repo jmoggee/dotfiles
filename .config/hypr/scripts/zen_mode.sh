@@ -51,7 +51,7 @@ enable_zen_mode() {
 enable_compact_mode() {
   kill_cava
   killall waybar
-  waybar -s ~/.config/waybar/compact.css &
+  waybar -c ~/.config/waybar/config-compact.jsonc -s ~/.config/waybar/compact.css &
   enable_no_gaps
 }
 

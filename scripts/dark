@@ -373,6 +373,9 @@ case "${1:-}" in
   start)
     start_dark
     hypr_bind
+
+    sleep 2
+    open_shell
     ;;
 
   stop)
