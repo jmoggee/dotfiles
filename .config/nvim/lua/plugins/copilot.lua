@@ -9,5 +9,8 @@ return {
         auto_trigger = true,
       },
     })
+
+    vim.keymap.set("i", "<A-m>", require("copilot.suggestion").accept_line)
+    vim.keymap.set("i", "<A-n>", require("copilot.suggestion").accept_word)
   end,
 }
