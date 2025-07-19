@@ -4,7 +4,7 @@ return {
   config = true,
   keys = {
     { "<leader>a", nil, desc = "AI/Claude Code" },
-    { "<leader>aa", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+    { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
     { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
     { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
     { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
@@ -17,7 +17,7 @@ return {
       ft = { "NvimTree", "neo-tree", "oil" },
     },
     -- Diff management
-    { "<leader>ay", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff (Yes)" },
-    { "<leader>an", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff (No)" },
+    { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+    { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
   },
 }
