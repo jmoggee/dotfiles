@@ -20,6 +20,9 @@ vim.opt.undofile = true
 -- Keep the signcolumn enabled by default
 vim.opt.signcolumn = "yes"
 
+-- Automatically reload external changes
+vim.opt.autoread = true
+
 --  How to display certain whitespace characters in the editor.
 vim.opt.list = true
 vim.opt.listchars = {
