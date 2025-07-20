@@ -6,14 +6,14 @@ return {
   },
 
   keys = {
-    { "<leader><leader>", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "File find frecency"},
+    { "<leader><leader>", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "File find frecency" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "File find" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "File recent" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "File grep" },
-    { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "File buffers" },
+    { "<leader>bb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "File buffers" },
   },
 
   config = function()
     require("telescope").load_extension("frecency")
-  end
+  end,
 }
