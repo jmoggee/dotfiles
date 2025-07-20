@@ -5,7 +5,7 @@ return {
   },
   opts = {
     show_icons = true,
-    leader_key = ";",
+    leader_key = "\\",
     buffer_leader_key = "m",
   },
 }
