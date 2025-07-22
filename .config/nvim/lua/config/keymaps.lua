@@ -29,3 +29,7 @@ vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help" 
 vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
 vim.keymap.set("n", "gr", vim.lsp.buf.rename, { desc = "Rename" })
+
+-- Center scrolling
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
