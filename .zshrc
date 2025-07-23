@@ -41,18 +41,21 @@ setopt appendhistory
 setopt hist_ignore_space
 
 # Aliases
-alias ls="exa --icons=auto"
-alias la="exa --icons=auto -la"
+alias ls="eza --icons=auto"
+alias la="eza --icons=auto -la"
 alias grep="grep --color=auto"
 alias pry="iex --dbg pry -S mix"
+alias txf="tmuxifier"
+alias txfs="tmuxifier s"
 
 # Exports
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$HOME/.tmuxifier/bin:$PATH"
 export SSH_AUTH_SOCK=~/.1password/agent.sock
-
+export EDITOR="nvim"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Evals
+eval "$(tmuxifier init -)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
