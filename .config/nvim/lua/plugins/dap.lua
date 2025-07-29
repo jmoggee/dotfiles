@@ -9,6 +9,9 @@ return {
   config = function()
     local dap, dapui = require("dap"), require("dapui")
 
+    vim.fn.mkdir(vim.fn.stdpath("cache") .. "/dap", "p")
+    dap.set_log_level("TRACE")
+
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
     end
@@ -37,21 +40,8 @@ return {
     -- Setup .NET debugger
     dap.adapters.coreclr = {
       type = "executable",
-      command = "netcoredbg",
+      command = "netcoredbg-dotnet8",
       args = { "--interpreter=vscode" },
-    }
-
-    dap.configurations.cs = {
-      {
-        type = "coreclr",
-        name = "launch - netcoredbg",
-        request = "launch",
-        program = function()
-          return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
-        end,
-        cwd = "${workspaceFolder}",
-        stopAtEntry = false,
-      },
     }
 
     require("dap.ext.vscode").load_launchjs()
