@@ -31,6 +31,9 @@ vim.opt.listchars = {
   nbsp = "␣",
 }
 
+-- Conceal level
+vim.opt.conceallevel = 1
+
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
