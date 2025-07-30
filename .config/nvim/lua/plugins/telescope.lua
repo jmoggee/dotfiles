@@ -3,6 +3,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-frecency.nvim",
+    "albenisolmos/telescope-oil.nvim",
   },
 
   keys = {
@@ -11,6 +12,7 @@ return {
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "File recent" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "File grep" },
     { "<leader>bb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "File buffers" },
+    { "<leader>fd", "<cmd>Telescope oil<cr>", desc = "File directories" },
   },
 
   config = function()
