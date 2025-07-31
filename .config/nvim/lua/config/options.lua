@@ -32,7 +32,7 @@ vim.opt.listchars = {
 }
 
 -- Conceal level
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 0
 
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
