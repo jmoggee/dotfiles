@@ -22,8 +22,8 @@ local function header_section(git_root)
   if vim.fn.filereadable(chafa_file) == 1 then
     return {
       section = "terminal",
-      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 50x50",
-      height = 24,
+      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 42x42",
+      height = 22,
       padding = 1,
       indent = 4,
     }
@@ -41,7 +41,7 @@ return {
     quickfile = { enabled = true },
     dashboard = {
       enabled = true,
-      width = 58,
+      width = 46,
       sections = {
         header_section(get_git_root()),
         { section = "keys", gap = 1, padding = 1 },
@@ -53,11 +53,16 @@ return {
           { icon = "󰈔 ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = "󰊄 ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
           { icon = "󰋚 ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-          { icon = "󰒓 ", key = "c", desc = "Config", action = ":Telescope find_files cwd=" .. vim.fn.stdpath("config") },
+          {
+            icon = "󰒓 ",
+            key = "c",
+            desc = "Config",
+            action = ":Telescope find_files cwd=" .. vim.fn.stdpath("config"),
+          },
           { icon = "󰁯 ", key = "s", desc = "Restore Session", section = "session" },
           { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy" },
           { icon = "󰅚 ", key = "q", desc = "Quit", action = ":qa" },
-        }
+        },
       },
     },
   },
