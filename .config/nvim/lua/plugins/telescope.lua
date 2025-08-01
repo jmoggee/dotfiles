@@ -4,6 +4,10 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-frecency.nvim",
     "albenisolmos/telescope-oil.nvim",
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
   },
 
   lazy = false,
@@ -18,6 +22,7 @@ return {
   },
 
   config = function()
+    require("telescope").load_extension("fzf")
     require("telescope").load_extension("frecency")
   end,
 }
