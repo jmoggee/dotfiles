@@ -1,12 +1,5 @@
 local M = {}
 
-local function concat_tables(t1, t2)
-  for _, v in ipairs(t2) do
-    table.insert(t1, v)
-  end
-  return t1
-end
-
 local function get_git_root()
   local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
   if vim.v.shell_error ~= 0 then
@@ -29,100 +22,14 @@ local function header_section(git_root)
   if vim.fn.filereadable(chafa_file) == 1 then
     return {
       section = "terminal",
-      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 42x42; sleep .1",
-      height = 20,
+      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 50x50",
+      height = 24,
       padding = 1,
       indent = 4,
     }
   end
 
   return fallback
-end
-
-local function git_sections(git_root)
-  if not git_root then
-    return {}
-  end
-
-  return {
-    {
-      pane = 2,
-      section = "terminal",
-      enabled = true,
-      cmd = "colorscript -e square",
-      height = 5,
-      padding = 1,
-    },
-
-    {
-      pane = 2,
-      icon = " ",
-      desc = "Browse Repo",
-      padding = 1,
-      key = "b",
-      action = function()
-        Snacks.gitbrowse()
-      end,
-    },
-
-    function()
-      local cmds = {
-        {
-          pane = 2,
-          icon = " ",
-          title = "Git Status",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "hub status --short --branch --renames",
-          height = 5,
-          padding = 1,
-          ttl = 0,
-          indent = 3,
-        },
-
-        {
-          icon = " ",
-          title = "Open PRs",
-          cmd = "gh pr list -L 8",
-          key = "p",
-          action = function()
-            vim.fn.jobstart("gh pr list --web", { detach = true })
-          end,
-          height = 12,
-        },
-      }
-
-      return vim.tbl_map(function(cmd)
-        return vim.tbl_extend("force", {
-          pane = 2,
-          section = "terminal",
-          enabled = true,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        }, cmd)
-      end, cmds)
-    end,
-  }
-end
-
--- Main function to generate sections
-function M.generate_dashboard_sections()
-  local git_root = get_git_root()
-  local sections = {
-    header_section(git_root),
-    { section = "keys", gap = 1, padding = 1 },
-    { section = "startup" },
-  }
-
-  sections = concat_tables(sections, git_sections(git_root))
-
-  -- Filter out sections that are nil (e.g., when not in git)
-  return vim.tbl_filter(function(section)
-    return section ~= nil
-  end, sections)
 end
 
 return {
@@ -134,7 +41,24 @@ return {
     quickfile = { enabled = true },
     dashboard = {
       enabled = true,
-      sections = M.generate_dashboard_sections(),
+      width = 58,
+      sections = {
+        header_section(get_git_root()),
+        { section = "keys", gap = 1, padding = 1 },
+        { section = "startup" },
+      },
+      preset = {
+        keys = {
+          { icon = "󰈞 ", key = "f", desc = "Find File", action = ":Telescope find_files" },
+          { icon = "󰈔 ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = "󰊄 ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
+          { icon = "󰋚 ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
+          { icon = "󰒓 ", key = "c", desc = "Config", action = ":Telescope find_files cwd=" .. vim.fn.stdpath("config") },
+          { icon = "󰁯 ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy" },
+          { icon = "󰅚 ", key = "q", desc = "Quit", action = ":qa" },
+        }
+      },
     },
   },
 }
