@@ -22,6 +22,14 @@ return {
   },
 
   config = function()
+    require("telescope").setup({
+      pickers = {
+        oldfiles = {
+          cwd_only = true,
+        },
+      },
+    })
+
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("frecency")
   end,
