@@ -3,38 +3,60 @@ return {
   dependencies = "nvim-tree/nvim-web-devicons",
   config = function()
     local theme = {
-      current = { fg = "#cad3f5", style = "bold" },
-      not_current = { fg = "#5b6078" },
-
-      fill = {},
+      fill = "TabLineFill",
+      head = "TabLine",
+      current_tab = "TabLineSel",
+      tab = "TabLine",
+      win = "TabLine",
+      tail = "TabLine",
     }
+    require("tabby").setup({
+      line = function(line)
+        return {
+          {
+            { "  ", hl = { fg = "#7FBBB3", bg = "#414B50" } },
+            line.sep("", theme.head, theme.fill),
+          },
+          line.tabs().foreach(function(tab)
+            local hl = tab.is_current() and theme.current_tab or theme.tab
 
-    require("tabby.tabline").set(function(line)
-      return {
-        line.tabs().foreach(function(tab)
-          local hl = tab.is_current() and theme.current or theme.not_current
-          return {
-            line.sep(" ", hl, theme.fill),
-            tab.name(),
-            line.sep(" ", hl, theme.fill),
-            hl = hl,
-          }
-        end),
-        line.spacer(),
-        line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-          local hl = win.is_current() and theme.current or theme.not_current
+            -- remove count of wins in tab with [n+] included in tab.name()
+            local name = tab.name()
+            local index = string.find(name, "%[%d")
+            local tab_name = index and string.sub(name, 1, index - 1) or name
 
-          return {
-            line.sep(" ", hl, theme.fill),
-            win.buf_name(),
-            line.sep(" ", hl, theme.fill),
-            hl = hl,
-          }
-        end),
-        hl = theme.fill,
-      }
-    end)
+            -- indicate if any of buffers in tab have unsaved changes
+            local modified = false
+            local win_ids = require("tabby.module.api").get_tab_wins(tab.id)
+            for _, win_id in ipairs(win_ids) do
+              if pcall(vim.api.nvim_win_get_buf, win_id) then
+                local bufid = vim.api.nvim_win_get_buf(win_id)
+                if vim.api.nvim_buf_get_option(bufid, "modified") then
+                  modified = true
+                  break
+                end
+              end
+            end
 
-    vim.keymap.set("n", "<leader><Tab>r", ":Tabby rename_tab ", { desc = "Rename tab" })
+            return {
+              line.sep("", hl, theme.fill),
+              tab.number(),
+              tab_name,
+              modified and "",
+              tab.close_btn(""),
+              line.sep("", hl, theme.fill),
+              hl = hl,
+              margin = " ",
+            }
+          end),
+          line.spacer(),
+          {
+            line.sep("", theme.tail, theme.fill),
+            { "  ", hl = theme.tail },
+          },
+          hl = theme.fill,
+        }
+      end,
+    })
   end,
 }

@@ -49,7 +49,7 @@ alias txf="tmuxifier"
 alias txfs="tmuxifier s"
 
 # Exports
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$HOME/.tmuxifier/bin:$HOME/.local/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$HOME/.tmuxifier/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 export EDITOR="nvim"
 export ERL_AFLAGS="-kernel shell_history enabled"

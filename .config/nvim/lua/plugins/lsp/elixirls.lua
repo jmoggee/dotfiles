@@ -6,6 +6,7 @@ return {
       dialyzerEnabled = true,
       fetchDeps = true,
       suggestSpecs = true,
+      mcpEnabled = true,
     },
   },
 }
