@@ -22,7 +22,7 @@ local function header_section(git_root)
   if vim.fn.filereadable(chafa_file) == 1 then
     return {
       section = "terminal",
-      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --format symbols --size 42x42",
+      cmd = "chafa " .. vim.fn.shellescape(chafa_file) .. " --probe off --format symbols --size 42x42",
       height = 22,
       padding = 1,
       indent = 4,
