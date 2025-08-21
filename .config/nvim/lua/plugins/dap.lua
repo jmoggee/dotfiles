@@ -55,10 +55,10 @@ return {
     vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug Step Into" })
     vim.keymap.set("n", "<F5>", dap.terminate, { desc = "Debug Stop" })
 
-    vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#d20f39" })
+    vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#ed8796" })
     vim.api.nvim_set_hl(0, "DapBreakpointLine", { bg = "#181825" })
 
-    vim.api.nvim_set_hl(0, "DapStopped", { fg = "#40a02b" })
+    vim.api.nvim_set_hl(0, "DapStopped", { fg = "#a6da95" })
     vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#11111b" })
 
     vim.fn.sign_define(
@@ -68,4 +68,3 @@ return {
     vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStoppedLine", numhl = "" })
   end,
 }
-

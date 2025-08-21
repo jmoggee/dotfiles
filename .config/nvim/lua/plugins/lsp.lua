@@ -1,20 +1,3 @@
-local function discover_lsps()
-  local capabilities = require("blink.cmp").get_lsp_capabilities()
-  local lspconfig = require("lspconfig")
-  local server_path = vim.fn.stdpath("config") .. "/lua/plugins/lsp"
-
-  for _, file in ipairs(vim.fn.readdir(server_path)) do
-    local server_name = file:gsub("%.lua$", "")
-    if server_name ~= "init" then
-      local server = require("plugins.lsp." .. server_name)
-      if type(server) == "table" then
-        server.capabilities = capabilities
-        lspconfig[server.name].setup(server)
-      end
-    end
-  end
-end
-
 return {
   {
     "williamboman/mason.nvim",
@@ -43,7 +26,35 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      discover_lsps()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local lspconfig = require("lspconfig")
+
+      -- Configure ElixirLS
+      lspconfig.elixirls.setup({
+        cmd = { "elixir-ls" },
+        capabilities = capabilities,
+        settings = {
+          elixirLS = {
+            dialyzerEnabled = true,
+            fetchDeps = true,
+            suggestSpecs = true,
+            mcpEnabled = true,
+            mcpPort = 3789,
+          },
+        },
+      })
+
+      -- Configure lua_ls
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
+      })
 
       -- Keymaps for diagnostics
       vim.api.nvim_set_keymap(
