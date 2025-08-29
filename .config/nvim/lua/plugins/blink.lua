@@ -3,7 +3,6 @@ return {
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
   dependencies = {
-    "Kaiser-Yang/blink-cmp-avante",
     "L3MON4D3/LuaSnip",
     version = "v2.*",
   },
