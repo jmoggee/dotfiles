@@ -57,7 +57,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # Evals
 eval "$(tmuxifier init -)"
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # Directory for client-specific scripts
