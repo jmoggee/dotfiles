@@ -6,8 +6,6 @@ return {
 
     config.setup({
       ensure_installed = {
-        "c_sharp",
-        "razor",
         "eex",
         "elixir",
         "erlang",

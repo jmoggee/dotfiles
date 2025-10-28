@@ -27,25 +27,15 @@ return {
     lazy = false,
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local lspconfig = require("lspconfig")
 
-      -- Configure ElixirLS
-      lspconfig.elixirls.setup({
-        cmd = { "elixir-ls" },
+      -- Configure Expert
+      vim.lsp.config('expert', {
+        cmd = { "/home/jean/expert_linux_amd64" },
         capabilities = capabilities,
-        settings = {
-          elixirLS = {
-            dialyzerEnabled = true,
-            fetchDeps = true,
-            suggestSpecs = true,
-            mcpEnabled = true,
-            mcpPort = 3789,
-          },
-        },
       })
 
       -- Configure lua_ls
-      lspconfig.lua_ls.setup({
+      vim.lsp.config('lua_ls', {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -55,27 +45,6 @@ return {
           },
         },
       })
-
-      -- Keymaps for diagnostics
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>do",
-        "<cmd>lua vim.diagnostic.open_float()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>dp",
-        "<cmd>lua vim.diagnostic.goto_prev()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>dn",
-        "<cmd>lua vim.diagnostic.goto_next()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", { noremap = true, silent = true })
     end,
   },
 }

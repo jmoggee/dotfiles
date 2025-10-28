@@ -1,24 +1,17 @@
--- Set up hybrid line numbering
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.g.mapleader = " "
 
--- Allow using mouse
-vim.opt.mouse = "a"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.wrap = false
+vim.o.softtabstop = 2
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+vim.o.swapfile = false
+vim.o.signcolumn = "yes"
+vim.o.winborder = "rounded"
 
--- Default indent options
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-
--- Hide the default status mode, we'll show it in our status line
-vim.opt.showmode = false
-
--- Save our undo history
-vim.opt.undofile = true
-
--- Keep the signcolumn enabled by default
-vim.opt.signcolumn = "yes"
+vim.o.mouse = "a"
 
 -- Automatically reload external changes
 vim.opt.autoread = true
@@ -31,9 +24,6 @@ vim.opt.listchars = {
   nbsp = "␣",
 }
 
--- Conceal level
-vim.opt.conceallevel = 0
-
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
@@ -41,7 +31,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("setlocal nonumber norelativenumber")
   end,
 })
-
-if vim.g.neovide then
-  vim.o.guifont = "ZedMono Nerd Font:h11"
-end

@@ -1,63 +1,97 @@
 return {
-  "nvim-neotest/neotest",
-  dependencies = {
-    "nvim-neotest/nvim-nio",
-    "nvim-lua/plenary.nvim",
-    "antoinemadec/FixCursorHold.nvim",
-    "nvim-treesitter/nvim-treesitter",
+	"nvim-neotest/neotest",
 
-    -- Test runners
-    "jfpedroza/neotest-elixir",
-  },
+	dependencies = {
+		"nvim-neotest/nvim-nio",
+		"nvim-lua/plenary.nvim",
+		"antoinemadec/FixCursorHold.nvim",
+		"nvim-treesitter/nvim-treesitter",
 
-  config = function()
-    local neotest = require("neotest")
+		-- Test runners
+		"jfpedroza/neotest-elixir",
+	},
 
-    neotest.setup({
-      adapters = {
-        require("neotest-elixir"),
-      },
-    })
+	keys = {
+		{
+			"<leader>tt",
+			mode = { "n" },
+			function()
+				require("neotest").run.run({ suite = true })
+				require("neotest").summary.open()
+			end,
+			desc = "Test Suite",
+		},
+		{
+			"<leader>tn",
+			mode = { "n" },
+			function()
+				require("neotest").run.run()
+			end,
+			desc = "Test Nearest",
+		},
+		{
+			"<leader>tf",
+			mode = { "n" },
+			function()
+				require("neotest").run.run(vim.fn.expand("%"))
+			end,
+			desc = "Test File",
+		},
+		{
+			"<leader>tx",
+			mode = { "n" },
+			function()
+				require("neotest").run.stop()
+			end,
+			desc = "Test Stop",
+		},
+		{
+			"<leader>to",
+			mode = { "n" },
+			function()
+				require("neotest").output_panel.toggle()
+			end,
+			desc = "Test Output",
+		},
+		{
+			"<leader>tp",
+			mode = { "n" },
+			function()
+				require("neotest").output_panel.toggle()
+			end,
+			desc = "Test Panel",
+		},
+		{
+			"<leader>ts",
+			mode = { "n" },
+			function()
+				require("neotest").summary.toggle()
+			end,
+			desc = "Test Summary",
+		},
+		{
+			"<leader>t,",
+			mode = { "n" },
+			function()
+				require("neotest").jump.prev({ status = "failed" })
+			end,
+			desc = "Previous Failed",
+		},
+		{
+			"<leader>t;",
+			mode = { "n" },
+			function()
+				require("neotest").jump.next({ status = "failed" })
+			end,
+			desc = "Next Failed",
+		},
+	},
 
-    vim.keymap.set("n", "<leader>tt", function()
-      neotest.run.run({ suite = true })
-      neotest.summary.open()
-    end, { desc = "Test Suite (All)" })
-
-    vim.keymap.set("n", "<leader>tn", function()
-      neotest.run.run()
-    end, { desc = "Test Nearest" })
-
-    vim.keymap.set("n", "<leader>tl", function()
-      neotest.run.run_last()
-    end, { desc = "Test Last" })
-
-    vim.keymap.set("n", "<leader>tf", function()
-      neotest.run.run(vim.fn.expand("%"))
-    end, { silent = true })
-
-    vim.keymap.set("n", "<leader>tx", function()
-      neotest.run.stop()
-    end)
-
-    vim.keymap.set("n", "<leader>ts", function()
-      neotest.summary.toggle()
-    end, { silent = true })
-
-    vim.keymap.set("n", "<leader>to", function()
-      neotest.output.open({ enter = true })
-    end)
-
-    vim.keymap.set("n", "<leader>tp", function()
-      neotest.output_panel.toggle()
-    end)
-
-    vim.keymap.set("n", "<leader>t,", function()
-      neotest.jump.prev({ status = "failed" })
-    end)
-
-    vim.keymap.set("n", "<leader>t;", function()
-      neotest.jump.next({ status = "failed" })
-    end)
-  end,
+	opts = function()
+		return {
+			adapters = {
+				require("neotest-elixir"),
+			},
+		}
+	end,
 }

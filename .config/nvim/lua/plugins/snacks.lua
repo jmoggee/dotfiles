@@ -1,71 +1,125 @@
-local M = {}
-
-local function get_git_root()
-  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-  if vim.v.shell_error ~= 0 then
-    return nil
-  end
-  return git_root
-end
-
--- Dynamically determine what header to display,
--- are we displaying a logo in the gitroot, or our default
--- neovim header?
-local function header_section(git_root)
-  local fallback = { section = "header" }
-
-  if not git_root then
-    return fallback
-  end
-
-  local chafa_file = git_root .. "/.chafa.png"
-  if vim.fn.filereadable(chafa_file) == 1 then
-    return {
-      section = "terminal",
-      cmd = "chafa "
-        .. vim.fn.shellescape(chafa_file)
-        .. " --probe 0.1 --format symbols --symbols sextant --size 42x42",
-      height = 22,
-      padding = 1,
-      indent = 4,
-    }
-  end
-
-  return fallback
-end
-
 return {
-  "folke/snacks.nvim",
-  priority = 1000,
-  lazy = false,
-  opts = {
-    bigfile = { enabled = true },
-    quickfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      width = 46,
-      sections = {
-        header_section(get_git_root()),
-        { section = "keys", gap = 1, padding = 1 },
-        { section = "startup" },
-      },
-      preset = {
-        keys = {
-          { icon = "󰈞 ", key = "f", desc = "Find File", action = ":Telescope find_files" },
-          { icon = "󰈔 ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = "󰊄 ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
-          { icon = "󰋚 ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-          {
-            icon = "󰒓 ",
-            key = "c",
-            desc = "Config",
-            action = ":Telescope find_files cwd=" .. vim.fn.stdpath("config"),
-          },
-          { icon = "󰁯 ", key = "s", desc = "Restore Session", section = "session" },
-          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy" },
-          { icon = "󰅚 ", key = "q", desc = "Quit", action = ":qa" },
-        },
-      },
-    },
-  },
+	"folke/snacks.nvim",
+
+	opts = {
+		picker = {
+			matches = {
+				frecency = true,
+			},
+			sources = {
+				lsp_definitions = { auto_confirm = false },
+				lsp_implementations = { auto_confirm = false },
+				lsp_references = { auto_confirm = false },
+				lsp_declarations = { auto_confirm = false },
+			},
+		},
+	},
+
+	keys = {
+		-- FILE PICKERS
+		{
+			"<leader>ff",
+			mode = { "n" },
+			function()
+				Snacks.picker.smart({ layout = "ivy" })
+			end,
+			desc = "File Picker",
+		},
+		{
+			"<leader>fg",
+			mode = { "n" },
+			function()
+				Snacks.picker.grep({ layout = "ivy" })
+			end,
+			desc = "File Grep Picker",
+		},
+		{
+			"<leader>fe",
+			mode = { "n" },
+			function()
+				Snacks.picker.explorer()
+			end,
+			desc = "File Explorer",
+		},
+
+		-- BUFFER PICKERS
+		{
+			"<leader>bb",
+			mode = { "n" },
+			function()
+				Snacks.picker.buffers({ layout = "ivy" })
+			end,
+			desc = "Buffer Picker",
+		},
+		{
+			"<leader>bg",
+			mode = { "n" },
+			function()
+				Snacks.picker.grep_buffers({ layout = "ivy" })
+			end,
+			desc = "Buffer Grep Picker",
+		},
+
+		-- LSP PICKERS
+		{
+			"<leader>lr",
+			mode = { "n" },
+			function()
+				Snacks.picker.lsp_references({ layout = "ivy" })
+			end,
+			desc = "LSP References",
+		},
+		{
+			"<leader>ld",
+			mode = { "n" },
+			function()
+				Snacks.picker.lsp_definitions({ layout = "ivy" })
+			end,
+			desc = "LSP Definitions",
+		},
+		{
+			"<leader>ls",
+			mode = { "n" },
+			function()
+				Snacks.picker.lsp_symbols({ layout = "ivy" })
+			end,
+			desc = "LSP Symbols",
+		},
+
+		-- HELP PICKERS
+		{
+			"<leader>hh",
+			mode = { "n" },
+			function()
+				Snacks.picker.help({ layout = "ivy" })
+			end,
+			desc = "Help Picker",
+		},
+		{
+			"<leader>hi",
+			mode = { "n" },
+			function()
+				Snacks.picker.highlights({ layout = "ivy" })
+			end,
+			desc = "Help Picker",
+		},
+
+		-- SCRATCH
+		{
+			"<leader>fs",
+			mode = { "n" },
+			function()
+				Snacks.scratch()
+			end,
+			desc = "Scratch Buffer",
+		},
+		{
+			"<leader>fS",
+			mode = { "n" },
+			function()
+				Snacks.scratch.select()()
+			end,
+			desc = "Select Scratch Buffer",
+		},
+	},
 }
