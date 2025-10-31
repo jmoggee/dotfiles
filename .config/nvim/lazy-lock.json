@@ -26,5 +26,6 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "b6b3c9e3f8db02a56416b8ee25d3dbd079ebf26b" },
   "snacks.nvim": { "branch": "main", "commit": "52f30a198a19bf5da6aa95cc642bfbb99b9bbfbf" },
   "tokyonight.nvim": { "branch": "main", "commit": "4fe1b0c44f5d6ee769cdfbdffc7ccb703f53feda" },
-  "vague.nvim": { "branch": "main", "commit": "5689afda42d60c8db12ff93dd6e1322f59e46a93" }
+  "vague.nvim": { "branch": "main", "commit": "5689afda42d60c8db12ff93dd6e1322f59e46a93" },
+  "vim-be-good": { "branch": "master", "commit": "0ae3de14eb8efc6effe7704b5e46495e91931cc5" }
 }
