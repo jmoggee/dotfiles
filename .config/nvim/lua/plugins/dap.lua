@@ -27,7 +27,7 @@ return {
     -- Setup Elixir debugger
     dap.adapters.mix_task = {
       type = "executable",
-      command = vim.fn.expand("~/.local/share/nvim/mason/packages/elixir-ls/debug_adapter.sh"),
+      command = vim.fn.expand("$MASON/packages/elixir-ls/debug_adapter.sh"),
       args = {},
       options = {
         initialize_timeout_sec = 300,

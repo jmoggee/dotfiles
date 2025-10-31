@@ -29,13 +29,13 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       -- Configure Expert
-      vim.lsp.config('expert', {
-        cmd = { "/home/jean/expert_linux_amd64" },
+      vim.lsp.config("expert", {
+        cmd = { "$MASON/packages/expert_linux_amd64" },
         capabilities = capabilities,
       })
 
       -- Configure lua_ls
-      vim.lsp.config('lua_ls', {
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = {
