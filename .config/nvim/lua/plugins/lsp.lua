@@ -28,13 +28,13 @@ return {
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      -- Configure Expert
+      -- Elixir (Expert)
       vim.lsp.config("expert", {
         cmd = { "$MASON/packages/expert_linux_amd64" },
         capabilities = capabilities,
       })
 
-      -- Configure lua_ls
+      -- Lua
       vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
@@ -44,6 +44,11 @@ return {
             },
           },
         },
+      })
+
+      -- Typescript / Javascript
+      vim.lsp.config("vtsls", {
+        capabilities = capabilities,
       })
 
       -- Tailwind CSS

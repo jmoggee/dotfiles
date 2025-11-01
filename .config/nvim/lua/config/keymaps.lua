@@ -14,3 +14,5 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Move between buffers
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>")
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>")
+
+vim.keymap.set("n", "gk", vim.diagnostic.open_float, { desc = "Diagnostic hover" })

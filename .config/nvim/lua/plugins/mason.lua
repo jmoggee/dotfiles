@@ -17,10 +17,12 @@ return {
         "html-lsp",
         "lua-language-server",
         "netcoredbg",
+        "prettier",
         "roslyn",
         "rzls",
         "stylua",
         "tailwindcss-language-server",
+        "vtsls",
       })
     end,
   },
