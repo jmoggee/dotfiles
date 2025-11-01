@@ -45,6 +45,18 @@ return {
           },
         },
       })
+
+      -- Tailwind CSS
+      vim.lsp.config("tailwindcss", {
+        capabilities = capabilities,
+        settings = {
+          includeLanguages = {
+            elixir = "html-eex",
+            eelixir = "html-eex",
+            heex = "html-eex",
+          },
+        },
+      })
     end,
   },
 }

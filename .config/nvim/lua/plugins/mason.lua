@@ -20,6 +20,7 @@ return {
         "roslyn",
         "rzls",
         "stylua",
+        "tailwindcss-language-server",
       })
     end,
   },
