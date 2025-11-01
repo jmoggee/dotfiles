@@ -12,6 +12,8 @@ vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
+vim.o.undofile = true
+vim.o.autoread = true
 
 vim.o.mouse = "a"
 
