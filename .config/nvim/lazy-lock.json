@@ -30,10 +30,13 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "b6b3c9e3f8db02a56416b8ee25d3dbd079ebf26b" },
   "roslyn.nvim": { "branch": "main", "commit": "7ba2dd0a5628c5ad3d8cc5a22e66ece3efc371bc" },
   "rzls.nvim": { "branch": "main", "commit": "bbfe0f5429cc74ca53815875faf4710c2a54f01b" },
-  "snacks.nvim": { "branch": "main", "commit": "78c875b222c938e7ecc91034602e385a409dd30b" },
+  "snacks.nvim": { "branch": "main", "commit": "9ad41782eced6a06034e568357cdad35cbf52ffa" },
   "todo-comments.nvim": { "branch": "main", "commit": "411503d3bedeff88484de572f2509c248e499b38" },
   "tokyonight.nvim": { "branch": "main", "commit": "2642dbb83333e0575d1c3436e1d837926871c5fb" },
   "undotree": { "branch": "master", "commit": "0f1c9816975b5d7f87d5003a19c53c6fd2ff6f7f" },
   "vague.nvim": { "branch": "main", "commit": "5689afda42d60c8db12ff93dd6e1322f59e46a93" },
+  "vim-dadbod": { "branch": "master", "commit": "e95afed23712f969f83b4857a24cf9d59114c2e6" },
+  "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
+  "vim-dadbod-ui": { "branch": "master", "commit": "236179fd6bdc2aabeb1326d428e6b29d41044d8e" },
   "vim-tmux-navigator": { "branch": "master", "commit": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a" }
 }
