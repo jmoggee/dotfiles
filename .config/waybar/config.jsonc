@@ -23,7 +23,8 @@
   "group/environment": {
     "orientation": "inherit",
     "modules": [
-      "clock"
+      "clock",
+      "custom/weather"
     ]
   },
 
@@ -231,13 +232,9 @@
   },
 
   "custom/weather": {
-    "format": "{}",
-    "format-alt": "{alt}: {}",
-    "format-alt-click": "click",
-    "interval": 3600,
+    "exec": "~/.config/waybar/scripts/weather.py waybar",
+    "restart-interval": 900,
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/weather.sh",
-    "tooltip" : true
   },
 
   "custom/exit": {

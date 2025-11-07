@@ -43,10 +43,12 @@ setopt hist_ignore_space
 # Aliases
 alias ls="eza --icons=auto"
 alias la="eza --icons=auto -la"
+alias lh="eza --icons=auto -lah --sort=size"
 alias grep="grep --color=auto"
 alias pry="iex --dbg pry -S mix"
 alias txf="tmuxifier"
-alias txfs="tmuxifier s"
+alias txs="tmuxifier s"
+alias txe="tmuxifier es"
 
 # Exports
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/scripts:$HOME/.tmuxifier/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"

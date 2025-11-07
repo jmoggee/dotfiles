@@ -6,3 +6,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export STEAMLIBRARY=$HOME/.steam/steam
 export PROTON=$STEAMLIBRARY/steamapps/common/Proton\ -\ Experimental/files
+
+export ELECTRON_OZONE_PLATFORM_HINT=auto
