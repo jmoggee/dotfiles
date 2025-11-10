@@ -24,7 +24,7 @@ return {
       end,
     })
 
-    vim.keymap.set("n", "<leader>t,", function()
+    vim.keymap.set("n", "<leader>w,", function()
       local snacks = require("snacks")
       snacks.input({ prompt = "Tab name: " }, function(input)
         if input then
@@ -33,8 +33,8 @@ return {
       end)
     end)
 
-    vim.keymap.set("n", "<leader>tc", "<cmd>tabnew<cr>")
-    vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<cr>")
-    vim.keymap.set("n", "<leader>tp", "<cmd>tabprev<cr>")
+    vim.keymap.set("n", "<leader>wc", "<cmd>tabnew<cr>")
+    vim.keymap.set("n", "<leader>wn", "<cmd>tabnext<cr>")
+    vim.keymap.set("n", "<leader>wp", "<cmd>tabprev<cr>")
   end,
 }
