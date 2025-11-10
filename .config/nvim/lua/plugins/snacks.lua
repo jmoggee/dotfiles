@@ -3,6 +3,7 @@ return {
 
   opts = {
     picker = {
+      focus = "list",
       matches = {
         frecency = true,
       },
@@ -26,12 +27,19 @@ return {
       desc = "File Picker",
     },
     {
-      "<leader>fg",
+      "<leader>/",
       mode = { "n" },
       function()
         Snacks.picker.grep({ layout = "ivy" })
       end,
       desc = "File Grep Picker",
+    },
+    {
+      "<leader>:",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
     },
     {
       "<leader>fe",
@@ -62,6 +70,55 @@ return {
 
     -- GIT PICKERS
     {
+      "<leader>gb",
+      function()
+        Snacks.picker.git_branches()
+      end,
+      desc = "Git Branches",
+    },
+    {
+      "<leader>gl",
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = "Git Log",
+    },
+    {
+      "<leader>gL",
+      function()
+        Snacks.picker.git_log_line()
+      end,
+      desc = "Git Log Line",
+    },
+    {
+      "<leader>gs",
+      function()
+        Snacks.picker.git_status()
+      end,
+      desc = "Git Status",
+    },
+    {
+      "<leader>gS",
+      function()
+        Snacks.picker.git_stash()
+      end,
+      desc = "Git Stash",
+    },
+    {
+      "<leader>gd",
+      function()
+        Snacks.picker.git_diff()
+      end,
+      desc = "Git Diff (Hunks)",
+    },
+    {
+      "<leader>gf",
+      function()
+        Snacks.picker.git_log_file()
+      end,
+      desc = "Git Log File",
+    },
+    {
       "<leader>gi",
       function()
         Snacks.picker.gh_issue()
@@ -69,7 +126,7 @@ return {
       desc = "Github Issues (open)",
     },
     {
-      "<leader>gi",
+      "<leader>gI",
       function()
         Snacks.picker.gh_issue({ state = "all" })
       end,
@@ -87,7 +144,7 @@ return {
       function()
         Snacks.picker.gh_pr({ state = "all" })
       end,
-      desc = "Github Pull Requests (open)",
+      desc = "Github Pull Requests (all)",
     },
 
     -- LSP PICKERS

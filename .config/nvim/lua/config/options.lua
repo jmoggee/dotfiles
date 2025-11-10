@@ -1,7 +1,5 @@
 vim.g.mapleader = " "
 
-vim.o.number = true
-vim.o.relativenumber = true
 vim.o.wrap = false
 vim.o.softtabstop = 2
 vim.o.tabstop = 2
@@ -15,7 +13,10 @@ vim.o.cursorlineopt = "number"
 vim.o.undofile = true
 vim.o.autoread = true
 
-vim.o.mouse = "a"
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.mouse = "a"
 
 -- Automatically reload external changes
 vim.opt.autoread = true
