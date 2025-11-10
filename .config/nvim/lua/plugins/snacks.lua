@@ -60,6 +60,36 @@ return {
       desc = "Buffer Grep Picker",
     },
 
+    -- GIT PICKERS
+    {
+      "<leader>gi",
+      function()
+        Snacks.picker.gh_issue()
+      end,
+      desc = "Github Issues (open)",
+    },
+    {
+      "<leader>gi",
+      function()
+        Snacks.picker.gh_issue({ state = "all" })
+      end,
+      desc = "Github Issues (open)",
+    },
+    {
+      "<leader>gp",
+      function()
+        Snacks.picker.gh_pr()
+      end,
+      desc = "Github Pull Requests (open)",
+    },
+    {
+      "<leader>gP",
+      function()
+        Snacks.picker.gh_pr({ state = "all" })
+      end,
+      desc = "Github Pull Requests (open)",
+    },
+
     -- LSP PICKERS
     {
       "<leader>lr",

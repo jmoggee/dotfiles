@@ -32,7 +32,10 @@ return {
       vim.keymap.set("n", "<F2>", dap.continue, { desc = "Debug Continue" })
       vim.keymap.set("n", "<F3>", dap.step_over, { desc = "Debug Step Over" })
       vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug Step Into" })
-      vim.keymap.set("n", "<F5>", dap.terminate, { desc = "Debug Stop" })
+      vim.keymap.set("n", "<F5>", function()
+        dap.terminate()
+        vim.cmd("DapViewClose")
+      end, { desc = "Debug Stop" })
 
       vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#ed8796" })
       vim.api.nvim_set_hl(0, "DapBreakpointLine", { bg = "#181825" })
@@ -49,6 +52,11 @@ return {
   },
   {
     "igorlfs/nvim-dap-view",
-    opts = { auto_toggle = true },
+    opts = {
+      winbar = {
+        default_section = "repl",
+      },
+      auto_toggle = true,
+    },
   },
 }
