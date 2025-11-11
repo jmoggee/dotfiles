@@ -26,9 +26,6 @@ return {
       require("dap.ext.vscode").load_launchjs()
 
       vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-      vim.keymap.set("n", "<leader>dl", function()
-        dapui.float_element("breakpoints")
-      end, { desc = "List Breakpoints" })
       vim.keymap.set("n", "<F2>", dap.continue, { desc = "Debug Continue" })
       vim.keymap.set("n", "<F3>", dap.step_over, { desc = "Debug Step Over" })
       vim.keymap.set("n", "<F4>", dap.step_into, { desc = "Debug Step Into" })
