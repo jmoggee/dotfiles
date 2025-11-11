@@ -32,7 +32,7 @@ return {
           hl.DapStoppedLine = { bg = "#1a2d1a" }
         end,
       })
-      -- vim.cmd.colorscheme("tokyonight-night")
+      vim.cmd.colorscheme("tokyonight-night")
     end,
   },
   {
@@ -80,7 +80,7 @@ return {
     },
     config = function(_, opts)
       require("kanso").setup(opts)
-      vim.cmd.colorscheme("kanso-zen")
+      -- vim.cmd.colorscheme("kanso-zen")
     end,
   },
   {
