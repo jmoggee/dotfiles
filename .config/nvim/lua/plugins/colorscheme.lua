@@ -24,6 +24,14 @@ return {
     "folke/tokyonight.nvim",
     priority = 1000,
     config = function()
+      require("tokyonight").setup({
+        on_highlights = function(hl, colors)
+          hl.DapBreakpoint = { fg = colors.red }
+          hl.DapBreakpointLine = { bg = colors.bg_highlight }
+          hl.DapStopped = { fg = colors.green }
+          hl.DapStoppedLine = { bg = colors.bg_highlight }
+        end,
+      })
       -- vim.cmd.colorscheme("tokyonight-night")
     end,
   },

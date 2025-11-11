@@ -19,10 +19,16 @@ vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>")
 vim.keymap.set("n", "<leader>wc", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>wn", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "<leader>wp", "<cmd>tabprev<cr>")
+vim.keymap.set("n", "<leader>w|", "<cmd>vsplit<cr>", { desc = "Open split vertically" })
+vim.keymap.set("n", "<leader>w_", "<cmd>split<cr>", { desc = "Open split horizontally" })
+
+vim.keymap.set("n", "<leader>ty", "<cmd>terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in window" })
+vim.keymap.set("n", "<leader>t|", "<cmd>vsplit | wincmd l | terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in vertical split" })
+vim.keymap.set("n", "<leader>t_", "<cmd>split | wincmd j | terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in horizontal split" })
 
 -- Jump to specific tab numbers
 for i = 1, 9 do
-  vim.keymap.set("n", "<leader>w" .. i, i .. "gt", { desc = "Go to tab " .. i })
+  vim.keymap.set("n", "<leader>" .. i, i .. "gt", { desc = "Go to tab " .. i })
 end
 
 vim.keymap.set("n", "gk", vim.diagnostic.open_float, { desc = "Diagnostic hover" })
