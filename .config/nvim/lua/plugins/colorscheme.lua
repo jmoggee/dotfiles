@@ -27,9 +27,9 @@ return {
       require("tokyonight").setup({
         on_highlights = function(hl, colors)
           hl.DapBreakpoint = { fg = colors.red }
-          hl.DapBreakpointLine = { bg = colors.bg_highlight }
+          hl.DapBreakpointLine = { bg = "#2d1a1a" }
           hl.DapStopped = { fg = colors.green }
-          hl.DapStoppedLine = { bg = colors.bg_highlight }
+          hl.DapStoppedLine = { bg = "#1a2d1a" }
         end,
       })
       -- vim.cmd.colorscheme("tokyonight-night")
