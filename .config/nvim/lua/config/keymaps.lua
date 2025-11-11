@@ -15,4 +15,14 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>")
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>")
 
+-- Tab amanagement
+vim.keymap.set("n", "<leader>wc", "<cmd>tabnew<cr>")
+vim.keymap.set("n", "<leader>wn", "<cmd>tabnext<cr>")
+vim.keymap.set("n", "<leader>wp", "<cmd>tabprev<cr>")
+
+-- Jump to specific tab numbers
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>w" .. i, i .. "gt", { desc = "Go to tab " .. i })
+end
+
 vim.keymap.set("n", "gk", vim.diagnostic.open_float, { desc = "Diagnostic hover" })

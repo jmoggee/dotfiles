@@ -13,6 +13,8 @@ return {
             local hl = tab.is_current() and theme.current_tab or theme.tab
             return {
               " ",
+              tab.number(),
+              " ",
               tab.name(),
               " ",
               hl = hl,
@@ -32,9 +34,5 @@ return {
         end
       end)
     end)
-
-    vim.keymap.set("n", "<leader>wc", "<cmd>tabnew<cr>")
-    vim.keymap.set("n", "<leader>wn", "<cmd>tabnext<cr>")
-    vim.keymap.set("n", "<leader>wp", "<cmd>tabprev<cr>")
   end,
 }

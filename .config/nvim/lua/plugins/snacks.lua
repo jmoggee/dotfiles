@@ -3,7 +3,7 @@ return {
 
   opts = {
     picker = {
-      focus = "list",
+      -- focus = "list",
       matches = {
         frecency = true,
       },
