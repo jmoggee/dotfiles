@@ -14,7 +14,7 @@ return {
             return {
               " ",
               tab.number(),
-              " ",
+              ". ",
               tab.name(),
               " ",
               hl = hl,
