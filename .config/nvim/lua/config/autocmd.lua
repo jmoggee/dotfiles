@@ -12,12 +12,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Set darker highlight for terminals
-vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    vim.opt_local.winhighlight = "Normal:NormalFloat,NormalNC:NormalFloat"
-  end,
-})
+-- -- Set darker highlight for terminals
+-- vim.api.nvim_create_autocmd("TermOpen", {
+--   callback = function()
+--     vim.opt_local.winhighlight = "Normal:NormalFloat,NormalNC:NormalFloat"
+--   end,
+-- })
 
 -- Add highlight for yank
 vim.api.nvim_create_autocmd("TextYankPost", {

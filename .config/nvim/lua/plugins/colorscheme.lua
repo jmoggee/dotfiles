@@ -61,8 +61,12 @@ return {
           StatusLineNC = { fg = theme.ui.nontext, bg = colors.palette.inkBg0 },
           MiniStatuslineFilename = { fg = theme.ui.fg_dim, bg = colors.palette.inkBg0 },
           NormalFloat = { fg = theme.ui.fg, bg = colors.palette.inkBg0 },
-          FloatBorder = { fg = theme.ui.float.fg_border, bg = colors.palette.inkBg0 },
+          FloatBorder = { fg = colors.palette.blueSaturated, bg = colors.palette.zenBg0 },
           FloatTitle = { fg = theme.ui.special, bg = colors.palette.inkBg0, bold = true },
+          DapBreakpoint = { fg = colors.palette.red2Saturated },
+          DapBreakpointLine = { bg = colors.palette.diffRed },
+          DapStopped = { fg = colors.palette.green2Saturated },
+          DapStoppedLine = { bg = colors.palette.diffGreen },
         }
       end,
     },

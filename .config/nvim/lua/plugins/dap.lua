@@ -37,12 +37,6 @@ return {
         vim.cmd("DapViewClose")
       end, { desc = "Debug Stop" })
 
-      vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#ed8796" })
-      vim.api.nvim_set_hl(0, "DapBreakpointLine", { bg = "#181825" })
-
-      vim.api.nvim_set_hl(0, "DapStopped", { fg = "#a6da95" })
-      vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#11111b" })
-
       vim.fn.sign_define(
         "DapBreakpoint",
         { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpointLine", numhl = "" }
