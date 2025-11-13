@@ -149,28 +149,68 @@ return {
 
     -- LSP PICKERS
     {
-      "<leader>lr",
-      mode = { "n" },
+      "gd",
       function()
-        Snacks.picker.lsp_references({ layout = "ivy" })
+        Snacks.picker.lsp_definitions()
       end,
-      desc = "LSP References",
+      desc = "Goto Definition",
     },
     {
-      "<leader>ld",
-      mode = { "n" },
+      "gD",
       function()
-        Snacks.picker.lsp_definitions({ layout = "ivy" })
+        Snacks.picker.lsp_declarations()
       end,
-      desc = "LSP Definitions",
+      desc = "Goto Declaration",
     },
     {
-      "<leader>ls",
-      mode = { "n" },
+      "gr",
       function()
-        Snacks.picker.lsp_symbols({ layout = "ivy" })
+        Snacks.picker.lsp_references()
+      end,
+      nowait = true,
+      desc = "References",
+    },
+    {
+      "gI",
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
+      desc = "Goto Implementation",
+    },
+    {
+      "gy",
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = "Goto T[y]pe Definition",
+    },
+    {
+      "gai",
+      function()
+        Snacks.picker.lsp_incoming_calls()
+      end,
+      desc = "C[a]lls Incoming",
+    },
+    {
+      "gao",
+      function()
+        Snacks.picker.lsp_outgoing_calls()
+      end,
+      desc = "C[a]lls Outgoing",
+    },
+    {
+      "gls",
+      function()
+        Snacks.picker.lsp_symbols()
       end,
       desc = "LSP Symbols",
+    },
+    {
+      "gws",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = "LSP Workspace Symbols",
     },
 
     -- HELP PICKERS
