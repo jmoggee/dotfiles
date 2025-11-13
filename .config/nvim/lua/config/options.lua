@@ -36,3 +36,15 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("setlocal nonumber norelativenumber")
   end,
 })
+
+if vim.g.neovide then
+  vim.o.guifont = "ZedMono Nerd Font:h14"
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_cursor_animation_length = 0
+  vim.keymap.set({ "n" }, "<C-=>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
+  end)
+  vim.keymap.set({ "n" }, "<C-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
+  end)
+end
