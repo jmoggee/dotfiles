@@ -149,66 +149,74 @@ return {
 
     -- LSP PICKERS
     {
-      "gd",
+      "<leader>ld",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_definitions()
+        Snacks.picker.lsp_definitions({ layout = "ivy" })
       end,
-      desc = "Goto Definition",
+      desc = "LSP Definitions",
     },
     {
-      "gD",
+      "<leader>lD",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_declarations()
+        Snacks.picker.lsp_declarations({ layout = "ivy" })
       end,
-      desc = "Goto Declaration",
+      desc = "LSP Declarations",
     },
     {
-      "gr",
+      "<leader>lr",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_references()
+        Snacks.picker.lsp_references({ layout = "ivy" })
       end,
-      nowait = true,
-      desc = "References",
+      desc = "LSP References",
     },
     {
-      "gI",
+      "<leader>li",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_implementations()
+        Snacks.picker.lsp_implementations({ layout = "ivy" })
       end,
-      desc = "Goto Implementation",
+      desc = "LSP Implementations",
     },
     {
-      "gy",
+      "<leader>lt",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_type_definitions()
+        Snacks.picker.lsp_type_definitions({ layout = "ivy" })
       end,
-      desc = "Goto T[y]pe Definition",
+      desc = "LSP Type Definitions",
     },
     {
-      "gai",
+      "<leader>lci",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_incoming_calls()
+        Snacks.picker.lsp_incoming_calls({ layout = "ivy" })
       end,
-      desc = "C[a]lls Incoming",
+      desc = "LSP Incoming Calls",
     },
     {
-      "gao",
+      "<leader>lco",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_outgoing_calls()
+        Snacks.picker.lsp_outgoing_calls({ layout = "ivy" })
       end,
-      desc = "C[a]lls Outgoing",
+      desc = "LSP Outgoing Calls",
     },
     {
-      "gls",
+      "<leader>ls",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_symbols()
+        Snacks.picker.lsp_symbols({ layout = "ivy" })
       end,
       desc = "LSP Symbols",
     },
     {
-      "gws",
+      "<leader>lws",
+      mode = { "n" },
       function()
-        Snacks.picker.lsp_workspace_symbols()
+        Snacks.picker.lsp_workspace_symbols({ layout = "ivy" })
       end,
       desc = "LSP Workspace Symbols",
     },
@@ -249,4 +257,23 @@ return {
       desc = "Select Scratch Buffer",
     },
   },
+
+  config = function(_, opts)
+    -- MonkeyPatch - https://github.com/folke/snacks.nvim/pull/2012
+    local M = require("snacks.picker.core.main")
+    M.new = function(opts)
+      opts = vim.tbl_extend("force", {
+        float = false,
+        file = true,
+        current = false,
+      }, opts or {})
+      local self = setmetatable({}, M)
+      self.opts = opts
+      self.win = vim.api.nvim_get_current_win()
+      return self
+    end
+
+    -- Setup snacks with opts
+    require("snacks").setup(opts)
+  end,
 }
