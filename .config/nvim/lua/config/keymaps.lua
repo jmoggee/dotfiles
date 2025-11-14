@@ -23,8 +23,18 @@ vim.keymap.set("n", "<leader>w|", "<cmd>vsplit<cr>", { desc = "Open split vertic
 vim.keymap.set("n", "<leader>w_", "<cmd>split<cr>", { desc = "Open split horizontally" })
 
 vim.keymap.set("n", "<leader>ty", "<cmd>terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in window" })
-vim.keymap.set("n", "<leader>t|", "<cmd>vsplit | wincmd l | terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in vertical split" })
-vim.keymap.set("n", "<leader>t_", "<cmd>split | wincmd j | terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in horizontal split" })
+vim.keymap.set(
+  "n",
+  "<leader>t|",
+  "<cmd>vsplit | wincmd l | terminal<cr><cmd>startinsert<cr>",
+  { desc = "Open terminal in vertical split" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>t_",
+  "<cmd>split | wincmd j | terminal<cr><cmd>startinsert<cr>",
+  { desc = "Open terminal in horizontal split" }
+)
 
 -- Jump to specific tab numbers
 for i = 1, 9 do

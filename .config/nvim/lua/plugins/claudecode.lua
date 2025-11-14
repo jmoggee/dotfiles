@@ -12,10 +12,14 @@ return {
     { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
   },
   opts = {
+    terminal = {
+      provider = "native",
+    },
     diff_opts = {
       layout = "vertical",
       open_in_new_tab = true,
       hide_terminal_in_new_tab = false,
+      keep_terminal_focus = true,
     },
   },
 }
