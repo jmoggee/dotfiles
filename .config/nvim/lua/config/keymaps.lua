@@ -41,4 +41,4 @@ for i = 1, 9 do
   vim.keymap.set("n", "<leader>" .. i, i .. "gt", { desc = "Go to tab " .. i })
 end
 
-vim.keymap.set("n", "gk", vim.diagnostic.open_float, { desc = "Diagnostic hover" })
+vim.keymap.set("n", "<leader>lk", vim.diagnostic.open_float, { desc = "Diagnostic hover" })
