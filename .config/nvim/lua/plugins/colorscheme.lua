@@ -5,6 +5,7 @@ return {
     config = function()
       require("tokyonight").setup({
         on_highlights = function(hl, colors)
+          hl.CursorLine = { bg = colors.bg_float }
           hl.DapBreakpoint = { fg = colors.red }
           hl.DapBreakpointLine = { bg = "#2d1a1a" }
           hl.DapStopped = { fg = colors.green }

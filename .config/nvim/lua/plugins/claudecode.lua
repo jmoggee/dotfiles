@@ -13,7 +13,7 @@ return {
   },
   opts = {
     terminal = {
-      provider = "native",
+      provider = "snacks",
     },
     diff_opts = {
       layout = "vertical",

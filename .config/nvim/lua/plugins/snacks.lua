@@ -236,7 +236,7 @@ return {
       function()
         Snacks.picker.highlights({ layout = "ivy" })
       end,
-      desc = "Help Picker",
+      desc = "Highlights Picker",
     },
 
     -- SCRATCH

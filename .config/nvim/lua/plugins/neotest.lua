@@ -13,7 +13,7 @@ return {
 
   keys = {
     {
-      "<leader>tt",
+      "<leader>Tt",
       mode = { "n" },
       function()
         require("neotest").run.run({ suite = true })
@@ -22,7 +22,7 @@ return {
       desc = "Test Suite",
     },
     {
-      "<leader>tn",
+      "<leader>Tn",
       mode = { "n" },
       function()
         require("neotest").run.run()
@@ -30,7 +30,7 @@ return {
       desc = "Test Nearest",
     },
     {
-      "<leader>tf",
+      "<leader>Tf",
       mode = { "n" },
       function()
         require("neotest").run.run(vim.fn.expand("%"))
@@ -38,7 +38,7 @@ return {
       desc = "Test File",
     },
     {
-      "<leader>tx",
+      "<leader>Tx",
       mode = { "n" },
       function()
         require("neotest").run.stop()
@@ -46,7 +46,7 @@ return {
       desc = "Test Stop",
     },
     {
-      "<leader>to",
+      "<leader>To",
       mode = { "n" },
       function()
         require("neotest").output_panel.toggle()
@@ -54,7 +54,7 @@ return {
       desc = "Test Output",
     },
     {
-      "<leader>tp",
+      "<leader>Tp",
       mode = { "n" },
       function()
         require("neotest").output_panel.toggle()
@@ -62,7 +62,7 @@ return {
       desc = "Test Panel",
     },
     {
-      "<leader>ts",
+      "<leader>Ts",
       mode = { "n" },
       function()
         require("neotest").summary.toggle()
@@ -70,7 +70,7 @@ return {
       desc = "Test Summary",
     },
     {
-      "<leader>t,",
+      "<leader>T,",
       mode = { "n" },
       function()
         require("neotest").jump.prev({ status = "failed" })
@@ -78,7 +78,7 @@ return {
       desc = "Previous Failed",
     },
     {
-      "<leader>t;",
+      "<leader>T;",
       mode = { "n" },
       function()
         require("neotest").jump.next({ status = "failed" })

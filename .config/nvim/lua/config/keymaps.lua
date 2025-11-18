@@ -19,19 +19,19 @@ vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>")
 vim.keymap.set("n", "<leader>wc", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>wn", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "<leader>wp", "<cmd>tabprev<cr>")
-vim.keymap.set("n", "<leader>w|", "<cmd>vsplit<cr>", { desc = "Open split vertically" })
-vim.keymap.set("n", "<leader>w_", "<cmd>split<cr>", { desc = "Open split horizontally" })
+vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Open split vertically" })
+vim.keymap.set("n", "<leader>ws", "<cmd>split<cr>", { desc = "Open split horizontally" })
 
-vim.keymap.set("n", "<leader>ty", "<cmd>terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in window" })
+vim.keymap.set("n", "<leader>tt", "<cmd>terminal<cr><cmd>startinsert<cr>", { desc = "Open terminal in window" })
 vim.keymap.set(
   "n",
-  "<leader>t|",
+  "<leader>tv",
   "<cmd>vsplit | wincmd l | terminal<cr><cmd>startinsert<cr>",
   { desc = "Open terminal in vertical split" }
 )
 vim.keymap.set(
   "n",
-  "<leader>t_",
+  "<leader>ts",
   "<cmd>split | wincmd j | terminal<cr><cmd>startinsert<cr>",
   { desc = "Open terminal in horizontal split" }
 )

@@ -9,7 +9,7 @@ vim.o.swapfile = false
 vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.cursorline = true
-vim.o.cursorlineopt = "number"
+-- vim.o.cursorlineopt = "number"
 vim.o.undofile = true
 vim.o.autoread = true
 
@@ -34,6 +34,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
   callback = function()
     vim.cmd("setlocal nonumber norelativenumber")
+  end,
+})
+
+-- Cursorline only in active window
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.cursorline = false
   end,
 })
 
