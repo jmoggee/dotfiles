@@ -35,21 +35,11 @@ vim.opt.listchars = {
 vim.opt.exrc = true
 vim.opt.secure = true
 
-local workspace_path = vim.fn.getcwd()
-local cache_dir = vim.fn.stdpath("data")
-local project_name = vim.fn.fnamemodify(workspace_path, ":t")
-local project_dir = cache_dir .. "/myshada" .. project_name
-
-if vim.fn.isdirectory(project_dir) == 0 then
-  vim.fn.mkdir(project_dir, "p")
+-- Per project shada file
+local shada_path = vim.fn.getcwd() .. "/.shada"
+if vim.fn.filereadable(shada_path) == 1 then
+  vim.opt.shadafile = shada_path
 end
-
-local shadafile = project_dir .. "/" .. vim.fn.sha256(workspace_path):sub(1, 8) .. ".shada"
-vim.opt.shadafile = shadafile
-
-vim.keymap.set("n", "<leader>fm", function()
-  require("snacks").marks({ cwd = project_dir })
-end)
 
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {

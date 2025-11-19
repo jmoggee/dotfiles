@@ -49,6 +49,21 @@ return {
       end,
       desc = "File Explorer",
     },
+    {
+      "<leader>'",
+      mode = { "n" },
+      function()
+        Snacks.picker.marks()
+      end,
+      desc = "File Marks",
+    },
+    {
+      '<leader>"',
+      mode = { "n" },
+      function()
+        Snacks.picker.registers()
+      end,
+    },
 
     -- BUFFER PICKERS
     {
