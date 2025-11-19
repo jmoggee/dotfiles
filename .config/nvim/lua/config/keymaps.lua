@@ -8,6 +8,11 @@ vim.keymap.set("t", "jk", "<c-\\><c-n>")
 -- vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 -- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<up>", [[<cmd>horizontal resize +2<cr>]])
+vim.keymap.set("n", "<down>", [[<cmd>horizontal resize -2<cr>]])
+vim.keymap.set("n", "<right>", [[<cmd>vertical resize -5<cr>]])
+vim.keymap.set("n", "<left>", [[<cmd>vertical resize -5<cr>]])
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
