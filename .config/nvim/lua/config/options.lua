@@ -19,6 +19,8 @@ vim.opt.relativenumber = true
 
 vim.opt.mouse = "a"
 
+vim.opt.exrc = true
+
 -- Automatically reload external changes
 vim.opt.autoread = true
 
