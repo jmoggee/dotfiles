@@ -4,7 +4,7 @@ return {
 
   opts = {
     preset = "modern",
-    delay = 300,
+    delay = 1000,
 
     -- Window styling
     win = {

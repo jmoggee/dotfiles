@@ -21,6 +21,10 @@ return {
             }
           end),
           line.spacer(),
+          {
+            " " .. os.date("%H:%M") .. " ",
+            hl = "Special",
+          },
           hl = theme.fill,
         }
       end,
@@ -34,5 +38,15 @@ return {
         end
       end)
     end)
+
+    -- Update tabline every minute to refresh the time
+    local timer = vim.loop.new_timer()
+    timer:start(
+      60000 - (os.time() % 60) * 1000, -- Start at the next minute boundary
+      60000, -- Repeat every 60 seconds
+      vim.schedule_wrap(function()
+        vim.cmd("redrawtabline")
+      end)
+    )
   end,
 }

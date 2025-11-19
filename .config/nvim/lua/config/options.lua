@@ -9,6 +9,7 @@ vim.o.swapfile = false
 vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.cursorline = true
+vim.o.showtabline = 2
 -- vim.o.cursorlineopt = "number"
 vim.o.undofile = true
 vim.o.autoread = true
@@ -54,6 +55,7 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
 
 if vim.g.neovide then
   vim.o.guifont = "ZedMono Nerd Font:h14"
+  vim.opt.linespace = 4
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_cursor_animation_length = 0
   vim.keymap.set({ "n" }, "<C-=>", function()
