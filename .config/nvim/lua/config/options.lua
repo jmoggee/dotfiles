@@ -34,12 +34,23 @@ vim.opt.listchars = {
 
 vim.opt.exrc = true
 vim.opt.secure = true
+vim.opt.shada = "'100,<50,s10,h"
 
 -- Per project shada file
 local shada_path = vim.fn.getcwd() .. "/.shada"
 if vim.fn.filereadable(shada_path) == 1 then
   vim.opt.shadafile = shada_path
 end
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line("'\"")
+    if line > 1 and line <= vim.fn.line("$") then
+      vim.cmd('normal! g`""`')
+    end
+  end,
+})
 
 -- No line numbers in nvim terminals
 vim.api.nvim_create_autocmd("TermOpen", {

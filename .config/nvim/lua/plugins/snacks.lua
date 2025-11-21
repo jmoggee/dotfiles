@@ -64,6 +64,14 @@ return {
         Snacks.picker.registers()
       end,
     },
+    {
+      "<leader>fj",
+      mode = { "n" },
+      function()
+        Snacks.picker.jumps()
+      end,
+      desc = "File Jumps",
+    },
 
     -- BUFFER PICKERS
     {
