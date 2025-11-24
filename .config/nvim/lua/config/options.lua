@@ -42,39 +42,6 @@ if vim.fn.filereadable(shada_path) == 1 then
   vim.opt.shadafile = shada_path
 end
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    local line = vim.fn.line("'\"")
-    if line > 1 and line <= vim.fn.line("$") then
-      vim.cmd('normal! g`""`')
-    end
-  end,
-})
-
--- No line numbers in nvim terminals
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = "*",
-  callback = function()
-    vim.cmd("setlocal nonumber norelativenumber")
-  end,
-})
-
--- Cursorline only in active window
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-  pattern = "*",
-  callback = function()
-    vim.wo.cursorline = true
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-  pattern = "*",
-  callback = function()
-    vim.wo.cursorline = false
-  end,
-})
-
 if vim.g.neovide then
   vim.o.guifont = "ZedMono Nerd Font:h14"
   vim.opt.linespace = 4

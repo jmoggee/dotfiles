@@ -10,6 +10,7 @@ return {
           hl.DapBreakpointLine = { bg = "#2d1a1a" }
           hl.DapStopped = { fg = colors.green }
           hl.DapStoppedLine = { bg = "#1a2d1a" }
+          -- hl.VisualMagenta = { bg = "#351a42" }
 
           -- Cursor colors for different modes
           hl.CursorNormal = { bg = colors.blue, fg = colors.bg }
@@ -27,12 +28,20 @@ return {
         "n-v:block-CursorNormal",
         "c:block-CursorCommand-blinkwait700-blinkon400-blinkoff250",
         "i-ci-ve:ver10-CursorInsert-blinkwait700-blinkon400-blinkoff250",
-        --"i-ci-ve:block-CursorInsert-blinkwait700-blinkon400-blinkoff250",
         "v-ve:block-CursorVisual",
         "r-cr:hor10-CursorReplace-blinkwait700-blinkon400-blinkoff250",
-        --"r-cr:block-CursorReplace-blinkwait700-blinkon400-blinkoff250",
         "o:hor50-CursorNormal",
       }
+
+      -- -- Apply magenta visual only to normal buffers
+      -- vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+      --   callback = function()
+      --     local ft = vim.bo.filetype
+      --     if not ft:match("^snacks") and ft ~= "" then
+      --       vim.wo.winhighlight = "Visual:VisualMagenta"
+      --     end
+      --   end,
+      -- })
     end,
   },
 }

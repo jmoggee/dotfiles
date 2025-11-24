@@ -34,3 +34,37 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "help",
   command = "wincmd L",
 })
+
+-- Return cursor back to the last position in the file
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line("'\"")
+    if line > 1 and line <= vim.fn.line("$") then
+      vim.cmd('normal! g`""`')
+    end
+  end,
+})
+
+-- No line numbers in nvim terminals
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("setlocal nonumber norelativenumber")
+  end,
+})
+
+-- Cursorline only in active window
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.cursorline = false
+  end,
+})
