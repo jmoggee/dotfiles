@@ -42,14 +42,6 @@ return {
       desc = "Command History",
     },
     {
-      "<leader>fe",
-      mode = { "n" },
-      function()
-        Snacks.picker.explorer()
-      end,
-      desc = "File Explorer",
-    },
-    {
       "<leader>'",
       mode = { "n" },
       function()
